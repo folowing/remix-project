@@ -14,3 +14,4 @@ trim_trailing_whitespace = false
 
 [{*.ts,*.sol}]
 trim_trailing_whitespace = false
+insert_final_newline = false
