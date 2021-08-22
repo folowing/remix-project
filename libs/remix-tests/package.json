@@ -35,10 +35,6 @@
   },
   "homepage": "https://github.com/ethereum/remix-project/tree/master/libs/remix-tests#readme",
   "dependencies": {
-    "@ethereumjs/block": "3.4.0",
-    "@ethereumjs/common": "2.4.0",
-    "@ethereumjs/tx": "3.3.0",
-    "@ethereumjs/vm": "5.5.0",
     "@remix-project/remix-lib": "^0.5.5",
     "@remix-project/remix-simulator": "^0.2.5",
     "@remix-project/remix-solidity": "^0.4.5",
