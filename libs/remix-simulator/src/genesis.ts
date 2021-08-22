@@ -1,5 +1,5 @@
 import { Block } from '@ethereumjs/block'
-import { BN } from 'ethereumjs-util'
+import { BN } from '@ethereumjs/util'
 
 export function generateBlock (vmContext) {
   return new Promise((resolve, reject) => {

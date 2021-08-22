@@ -1,7 +1,7 @@
 'use strict'
 import { Transaction as Tx } from '@ethereumjs/tx'
 import { Block } from '@ethereumjs/block'
-import { BN, bufferToHex, Address } from 'ethereumjs-util'
+import { BN, bufferToHex, Address } from '@ethereumjs/util'
 import { vm as remixlibVM } from '@remix-project/remix-lib'
 import VM from '@ethereumjs/vm'
 import Common from '@ethereumjs/common'

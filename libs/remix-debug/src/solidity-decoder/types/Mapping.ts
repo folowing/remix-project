@@ -1,7 +1,7 @@
 'use strict'
 import { RefType } from './RefType'
 import { normalizeHex } from './util'
-import { toBuffer, setLengthLeft, keccak, BN, bufferToHex, addHexPrefix } from 'ethereumjs-util'
+import { toBuffer, setLengthLeft, keccak, BN, bufferToHex, addHexPrefix } from '@ethereumjs/util'
 
 export class Mapping extends RefType {
   keyType

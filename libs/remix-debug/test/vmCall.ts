@@ -1,10 +1,9 @@
 'use strict'
 import { Block } from '@ethereumjs/block'
 import VM from '@ethereumjs/vm'
-var utileth = require('ethereumjs-util')
-var Tx = require('@ethereumjs/tx').Transaction
-var BN = require('ethereumjs-util').BN
-var remixLib = require('@remix-project/remix-lib')
+import { Transaction as Tx } from '@ethereumjs/tx'
+import { BN, bufferToHex, Address } from '@ethereumjs/util'
+import remixLib from '@remix-project/remix-lib'
 
 function sendTx (vm, from, to, value, data, cb) {
   var tx = new Tx({
@@ -25,7 +24,7 @@ function sendTx (vm, from, to, value, data, cb) {
   }) // still using default common
   vm.runTx({block: block, tx: tx, skipBalance: true, skipNonce: true}).then(function (result) {
     setTimeout(() => {
-      cb(null, utileth.bufferToHex(tx.hash()))
+      cb(null, bufferToHex(tx.hash()))
     }, 500)
   }).catch((error) => {
     console.error(error)
@@ -37,7 +36,7 @@ function sendTx (vm, from, to, value, data, cb) {
   Init VM / Send Transaction
 */
 async function initVM (privateKey) {
-  var address = utileth.Address.fromPrivateKey(privateKey)
+  var address = Address.fromPrivateKey(privateKey)
   var vm = new VM({
     activatePrecompiles: true
   })

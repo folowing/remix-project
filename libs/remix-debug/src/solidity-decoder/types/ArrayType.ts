@@ -1,7 +1,7 @@
 'use strict'
 import { add, toBN, extractHexValue } from './util'
 import { util } from '@remix-project/remix-lib'
-import { BN } from 'ethereumjs-util'
+import { BN } from '@ethereumjs/util'
 import { RefType } from './RefType'
 const sha3256 = util.sha3_256
 

@@ -1,7 +1,7 @@
 'use strict'
 import { each } from 'async'
 import { ethers } from 'ethers'
-import { toBuffer, addHexPrefix } from 'ethereumjs-util'
+import { toBuffer, addHexPrefix } from '@ethereumjs/util'
 import { EventManager } from '../eventManager'
 import { compareByteCode } from '../util'
 import { decodeResponse } from './txFormat'

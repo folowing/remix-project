@@ -1,7 +1,7 @@
 /* global ethereum */
 'use strict'
 import Web3 from 'web3'
-import { rlp, keccak, bufferToHex } from 'ethereumjs-util'
+import { rlp, keccak, bufferToHex } from '@ethereumjs/util'
 import { vm as remixLibVm, execution } from '@remix-project/remix-lib'
 import VM from '@ethereumjs/vm'
 import Common from '@ethereumjs/common'

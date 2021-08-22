@@ -1,5 +1,5 @@
 'use strict'
-import { BN, bufferToHex, unpadHexString } from 'ethereumjs-util'
+import { BN, bufferToHex, unpadHexString } from '@ethereumjs/util'
 
 export function decodeIntFromHex (value, byteLength, signed) {
   let bigNumber = new BN(value, 16)

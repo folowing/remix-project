@@ -3,7 +3,7 @@ import { Plugin } from '@remixproject/engine'
 import { compile } from '@remix-project/remix-solidity'
 import { util } from '@remix-project/remix-lib'
 
-const ethutil = require('ethereumjs-util')
+import * as ethutil from '@ethereumjs/util'
 
 const profile = {
   name: 'fetchAndCompile',
