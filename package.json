@@ -130,10 +130,6 @@
   },
   "dependencies": {
     "@erebos/bzz-node": "^0.13.0",
-    "@ethereumjs/block": "3.4.0",
-    "@ethereumjs/common": "2.4.0",
-    "@ethereumjs/tx": "3.3.0",
-    "@ethereumjs/vm": "5.5.0",
     "@tvmjs/block": "3.4.0",
     "@tvmjs/common": "2.4.0",
     "@tvmjs/tx": "3.3.0",
