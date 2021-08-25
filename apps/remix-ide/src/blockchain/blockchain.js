@@ -1,5 +1,5 @@
 import Web3 from 'web3'
-import { toBuffer, addHexPrefix } from 'ethereumjs-util'
+import { toBuffer, addHexPrefix } from '@tvmjs/util'
 import { waterfall } from 'async'
 import { EventEmitter } from 'events'
 import { ExecutionContext } from './execution-context'
