@@ -1,6 +1,6 @@
 {
   "name": "@remix-project/remix-simulator",
-  "version": "0.2.5",
+  "version": "0.2.5-tron",
   "description": "Ethereum IDE and tools for the web",
   "contributors": [
     {
@@ -14,17 +14,17 @@
   ],
   "main": "src/index.js",
   "dependencies": {
-    "@ethereumjs/block": "3.4.0",
-    "@ethereumjs/common": "2.4.0",
-    "@ethereumjs/vm": "5.5.0",
-    "@remix-project/remix-lib": "^0.5.5",
+    "@tvmjs/block": "3.4.0",
+    "@tvmjs/common": "2.4.0",
+    "@tvmjs/vm": "5.5.0",
+    "@remix-project/remix-lib": "0.5.5-tron",
     "ansi-gray": "^0.1.1",
     "async": "^3.1.0",
     "body-parser": "^1.18.2",
     "color-support": "^1.1.3",
     "commander": "^2.19.0",
     "cors": "^2.8.5",
-    "@ethereumjs/util": "7.1.0",
+    "@tvmjs/util": "7.1.0",
     "ethers": "^5.4.2",
     "express": "^4.16.3",
     "express-ws": "^4.0.0",

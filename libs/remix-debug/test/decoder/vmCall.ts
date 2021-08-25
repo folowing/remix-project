@@ -1,10 +1,10 @@
 'use strict'
-import { Transaction as Tx } from '@ethereumjs/tx'
-import { Block } from '@ethereumjs/block'
-import { BN, bufferToHex, Address } from '@ethereumjs/util'
+import { Transaction as Tx } from '@tvmjs/tx'
+import { Block } from '@tvmjs/block'
+import { BN, bufferToHex, Address } from '@tvmjs/util'
 import { vm as remixlibVM } from '@remix-project/remix-lib'
-import VM from '@ethereumjs/vm'
-import Common from '@ethereumjs/common'
+import VM from '@tvmjs/vm'
+import Common from '@tvmjs/common'
 
 export function sendTx (vm, from, to, value, data, cb?) {
   cb = cb || (() => {})
@@ -55,7 +55,7 @@ async function createVm (hardfork) {
   Init VM / Send Transaction
 */
 export async function initVM (st, privateKey) {
-  var VM = await createVm('berlin')
+  var VM = await createVm('tron')
   const vm = VM.vm
 
   var address = Address.fromPrivateKey(privateKey)

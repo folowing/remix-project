@@ -1,4 +1,4 @@
-import { BN, privateToAddress, toChecksumAddress, isValidPrivate, Address } from '@ethereumjs/util'
+import { BN, privateToAddress, toChecksumAddress, isValidPrivate, Address } from '@tvmjs/util'
 import Web3 from 'web3'
 import * as crypto from 'crypto'
 
