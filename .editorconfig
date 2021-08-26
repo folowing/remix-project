@@ -11,3 +11,8 @@ trim_trailing_whitespace = true
 [*.md]
 max_line_length = off
 trim_trailing_whitespace = false
+
+[{*.ts,*.js,*.json,*.html}]
+max_line_length = off
+trim_trailing_whitespace = false
+trim_trailing_whitespace = false
