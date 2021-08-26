@@ -1,6 +1,6 @@
 {
   "name": "@remix-project/remix-astwalker",
-  "version": "0.0.35",
+  "version": "0.0.35-tron",
   "description": "Tool to walk through Solidity AST",
   "main": "index.js",
   "scripts": {
@@ -34,7 +34,7 @@
     ]
   },
   "dependencies": {
-    "@remix-project/remix-lib": "^0.5.5",
+    "@remix-project/remix-lib": "0.5.5-tron",
     "@types/tape": "^4.2.33",
     "async": "^2.6.2",
     "ethers": "^5.4.2",

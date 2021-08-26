@@ -1,8 +1,8 @@
 'use strict'
-import { Block } from '@ethereumjs/block'
-import VM from '@ethereumjs/vm'
-import { Transaction as Tx } from '@ethereumjs/tx'
-import { BN, bufferToHex, Address } from '@ethereumjs/util'
+import { Block } from '@tvmjs/block'
+import VM from '@tvmjs/vm'
+import { Transaction as Tx } from '@tvmjs/tx'
+import { BN, bufferToHex, Address } from '@tvmjs/util'
 import remixLib from '@remix-project/remix-lib'
 
 function sendTx (vm, from, to, value, data, cb) {

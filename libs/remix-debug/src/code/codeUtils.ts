@@ -1,6 +1,6 @@
 'use strict'
-import Common from '@ethereumjs/common'
-import { getOpcodesForHF } from '@ethereumjs/vm/dist/evm/opcodes'
+import Common from '@tvmjs/common'
+import { getOpcodesForHF } from '@tvmjs/vm/dist/evm/opcodes'
 import getOpcodes from './opcodes'
 
 export function nameOpCodes (raw, hardfork) {

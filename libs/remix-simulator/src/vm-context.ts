@@ -1,12 +1,12 @@
 /* global ethereum */
 'use strict'
 import Web3 from 'web3'
-import { rlp, keccak, bufferToHex } from '@ethereumjs/util'
+import { rlp, keccak, bufferToHex } from '@tvmjs/util'
 import { vm as remixLibVm, execution } from '@remix-project/remix-lib'
-import VM from '@ethereumjs/vm'
-import Common from '@ethereumjs/common'
-import StateManager from '@ethereumjs/vm/dist/state/stateManager'
-import { StorageDump } from '@ethereumjs/vm/dist/state/interface'
+import VM from '@tvmjs/vm'
+import Common from '@tvmjs/common'
+import StateManager from '@tvmjs/vm/dist/state/stateManager'
+import { StorageDump } from '@tvmjs/vm/dist/state/interface'
 
 /*
   extend vm state manager and instanciate VM
@@ -99,7 +99,7 @@ export class VMContext {
   constructor (fork?) {
     this.blockGasLimitDefault = 4300000
     this.blockGasLimit = this.blockGasLimitDefault
-    this.currentFork = fork || 'london'
+    this.currentFork = fork || 'tron'
     this.currentVm = this.createVm(this.currentFork)
     this.blocks = {}
     this.latestBlockNumber = 0

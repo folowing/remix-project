@@ -1,4 +1,4 @@
-import { BN } from 'ethereumjs-util'
+import { BN } from '@tvmjs/util'
 const $ = require('jquery')
 const yo = require('yo-yo')
 const remixLib = require('@remix-project/remix-lib')
@@ -279,7 +279,7 @@ class SettingsUI {
         <br>
         <br>For more info: <a href="https://remix-ide.readthedocs.io/en/latest/run.html#more-about-web3-provider" target="_blank">Remix Docs on Web3 Provider</a>
         <br>
-        <br> 
+        <br>
         Web3 Provider Endpoint
       </div>
     `

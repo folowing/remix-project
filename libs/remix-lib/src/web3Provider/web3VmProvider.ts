@@ -1,6 +1,6 @@
 import { hexListFromBNs, formatMemory } from '../util'
 import { normalizeHexAddress } from '../helpers/uiHelper'
-import { toChecksumAddress, BN, bufferToHex, Address } from '@ethereumjs/util'
+import { toChecksumAddress, BN, bufferToHex, Address } from '@tvmjs/util'
 import Web3 from 'web3'
 
 export class Web3VmProvider {

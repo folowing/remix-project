@@ -1,5 +1,5 @@
 import Web3 from 'web3'
-import { toChecksumAddress, BN, Address } from '@ethereumjs/util'
+import { toChecksumAddress, BN, Address } from '@tvmjs/util'
 import { processTx } from './txProcess'
 import { execution } from '@remix-project/remix-lib'
 const TxRunnerVM = execution.TxRunnerVM

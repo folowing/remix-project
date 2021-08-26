@@ -3,7 +3,7 @@
 
 var $ = require('jquery')
 var yo = require('yo-yo')
-var ethJSUtil = require('ethereumjs-util')
+var ethJSUtil = require('@tvmjs/util')
 var BN = ethJSUtil.BN
 var helper = require('../../lib/helper')
 var copyToClipboard = require('./copy-to-clipboard')

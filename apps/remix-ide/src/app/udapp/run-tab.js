@@ -3,7 +3,7 @@ import * as packageJson from '../../../../../package.json'
 
 const $ = require('jquery')
 const yo = require('yo-yo')
-const ethJSUtil = require('ethereumjs-util')
+const ethJSUtil = require('@tvmjs/util')
 const Web3 = require('web3')
 const EventManager = require('../../lib/events')
 const Card = require('../ui/card')

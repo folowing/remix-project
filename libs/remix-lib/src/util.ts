@@ -1,5 +1,5 @@
 'use strict'
-import { BN, bufferToHex, keccak, setLengthLeft, toBuffer, addHexPrefix } from '@ethereumjs/util'
+import { BN, bufferToHex, keccak, setLengthLeft, toBuffer, addHexPrefix } from '@tvmjs/util'
 import stringSimilarity from 'string-similarity'
 
 /*

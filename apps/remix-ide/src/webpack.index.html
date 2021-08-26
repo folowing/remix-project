@@ -51,18 +51,16 @@
 						if (keyValue[0] !== '') {
 							params[keyValue[0]] = keyValue[1]
 						}
-					}	
+					}
 					return params
 				}
         const defaultVersion = '0.8.0'
         let versionToLoad = urlParams().appVersion ? urlParams().appVersion : defaultVersion
-                
+
 				let assets = {
 						'0.8.0': ['https://use.fontawesome.com/releases/v5.8.1/css/all.css', 'assets/css/pygment_trac.css'],
-						'0.7.7': ['assets/css/font-awesome.min.css', 'assets/css/pygment_trac.css']
 				}
 				let versions = {
-						'0.7.7': 'assets/js/0.7.7/app.js', // commit 7b5c7ae3de935e0ccc32eadfd83bf7349478491e
 						'0.8.0': 'main.js'
 				}
 				for (let k in assets[versionToLoad]) {
@@ -86,7 +84,7 @@
 						document.body.appendChild(app)
 						window.remixFileSystem = require('fs')
 					})
-				}				
+				}
 		</script>
 	</body>
 </html>

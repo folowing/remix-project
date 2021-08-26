@@ -1,6 +1,6 @@
 import publishToStorage from '../../../publishToStorage'
 const yo = require('yo-yo')
-const ethJSUtil = require('ethereumjs-util')
+const ethJSUtil = require('@tvmjs/util')
 const css = require('../styles/run-tab-styles')
 const modalDialogCustom = require('../../ui/modal-dialog-custom')
 const remixLib = require('@remix-project/remix-lib')

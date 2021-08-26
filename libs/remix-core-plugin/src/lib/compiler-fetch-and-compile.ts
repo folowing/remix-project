@@ -3,7 +3,7 @@ import { Plugin } from '@remixproject/engine'
 import { compile } from '@remix-project/remix-solidity'
 import { util } from '@remix-project/remix-lib'
 
-import * as ethutil from '@ethereumjs/util'
+import { toChecksumAddress } from '@tvmjs/util'
 
 const profile = {
   name: 'fetchAndCompile',
@@ -32,7 +32,7 @@ export class FetchAndCompile extends Plugin {
    * @return {CompilerAbstract} - compilation data targeting the given @arg contractAddress
    */
   async resolve (contractAddress, codeAtAddress, targetPath) {
-    contractAddress = ethutil.toChecksumAddress(contractAddress)
+    contractAddress = toChecksumAddress(contractAddress)
 
     const localCompilation = async () => await this.call('compilerArtefacts', 'get', contractAddress) ? await this.call('compilerArtefacts', 'get', contractAddress) : await this.call('compilerArtefacts', 'get', '__last') ? await this.call('compilerArtefacts', 'get', '__last') : null
 
