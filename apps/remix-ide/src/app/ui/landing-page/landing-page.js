@@ -402,13 +402,6 @@ export class LandingPage extends ViewPlugin {
     this.moreEnv.getElementsByTagName('img')[0].style.filter = `invert(${invertNum})`
     this.websiteIcon.style.filter = `invert(${invertNum})`
 
-    const switchToPreviousVersion = () => {
-      const query = new QueryParams()
-      query.update({ appVersion: '0.7.7' })
-      _paq.push(['trackEvent', 'LoadingType', 'oldExperience_0.7.7'])
-      document.location.reload()
-    }
-
     const migrate = async () => {
       try {
         setTimeout(() => {
@@ -508,7 +501,7 @@ export class LandingPage extends ViewPlugin {
                       ${this.optimismEnv}
                       ${this.learnEthEnv}
                       ${this.solhintEnv}
-                      ${this.sourcifyEnv}                      
+                      ${this.sourcifyEnv}
                       ${this.moreEnv}
                     </div>
                   </div>
@@ -556,10 +549,6 @@ export class LandingPage extends ViewPlugin {
                       <p class="mb-1">
                         ${this.websiteIcon}
                         <a class="${css.text}" target="__blank" href="https://remix-project.org">Featuring website</a>
-                      </p>
-                      <p class="mb-1">
-                        <i class="fab fa-ethereum ${css.image}"></i>
-                        <span class="${css.text}" onclick=${() => switchToPreviousVersion()}>Old experience</span>
                       </p>
                     </div>
                   </div>

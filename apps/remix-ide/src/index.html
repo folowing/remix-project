@@ -30,7 +30,7 @@
 		<title>Remix - Ethereum IDE</title>
 		<link rel="stylesheet" href="assets/css/pygment_trac.css">
 		<link rel="icon" type="x-icon" href="assets/img/icon.png">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/4.1.0/introjs.min.css"> 
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/4.1.0/introjs.min.css">
 		<script src="assets/js/browserfs.min.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 		<!-- Matomo -->
@@ -82,13 +82,11 @@
 			}
 			const defaultVersion = '0.8.0'
 			let versionToLoad = urlParams().appVersion ? urlParams().appVersion : defaultVersion
-                
+
 			let assets = {
 				'0.8.0': ['https://use.fontawesome.com/releases/v5.8.1/css/all.css', 'assets/css/pygment_trac.css'],
-				'0.7.7': ['assets/css/font-awesome.min.css', 'assets/css/pygment_trac.css']
 			}
 			let versions = {
-				'0.7.7': 'assets/js/0.7.7/app.js', // commit 7b5c7ae3de935e0ccc32eadfd83bf7349478491e
 				'0.8.0': 'main.js'
 			}
 			for (let k in assets[versionToLoad]) {
