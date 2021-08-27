@@ -12,6 +12,7 @@ trim_trailing_whitespace = true
 max_line_length = off
 trim_trailing_whitespace = false
 
-[{*.ts,*.sol,*.html}]
+[{*.ts,*.js,*.json,*.html}]
+max_line_length = off
 trim_trailing_whitespace = false
 insert_final_newline = false

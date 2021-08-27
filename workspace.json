@@ -138,7 +138,8 @@
             "tsConfig": "libs/remix-analyzer/tsconfig.lib.json",
             "packageJson": "libs/remix-analyzer/package.json",
             "main": "libs/remix-analyzer/src/index.ts",
-            "assets": ["libs/remix-analyzer/*.md"]
+            "assets": ["libs/remix-analyzer/*.md"],
+            "sourceMap": false
           }
         }
       }
@@ -172,7 +173,8 @@
             "tsConfig": "libs/remix-astwalker/tsconfig.lib.json",
             "packageJson": "libs/remix-astwalker/package.json",
             "main": "libs/remix-astwalker/src/index.ts",
-            "assets": ["libs/remix-astwalker/*.md"]
+            "assets": ["libs/remix-astwalker/*.md"],
+            "sourceMap": false
           }
         }
       }
@@ -217,7 +219,8 @@
                 "input": "libs/remix-debug/",
                 "output": "/"
               }
-            ]
+            ],
+            "sourceMap": false
           }
         }
       }
@@ -251,7 +254,8 @@
             "tsConfig": "libs/remix-lib/tsconfig.lib.json",
             "packageJson": "libs/remix-lib/package.json",
             "main": "libs/remix-lib/src/index.ts",
-            "assets": ["libs/remix-lib/*.md"]
+            "assets": ["libs/remix-lib/*.md"],
+            "sourceMap": false
           }
         }
       }
@@ -296,7 +300,8 @@
                 "input": "libs/remix-simulator/",
                 "output": "/"
               }
-            ]
+            ],
+            "sourceMap": false
           }
         }
       }
@@ -330,7 +335,8 @@
             "tsConfig": "libs/remix-solidity/tsconfig.lib.json",
             "packageJson": "libs/remix-solidity/package.json",
             "main": "libs/remix-solidity/src/index.ts",
-            "assets": ["libs/remix-solidity/*.md"]
+            "assets": ["libs/remix-solidity/*.md"],
+            "sourceMap": false
           }
         }
       }
@@ -416,7 +422,8 @@
             "tsConfig": "libs/remix-url-resolver/tsconfig.lib.json",
             "packageJson": "libs/remix-url-resolver/package.json",
             "main": "libs/remix-url-resolver/src/index.ts",
-            "assets": ["libs/remix-url-resolver/*.md"]
+            "assets": ["libs/remix-url-resolver/*.md"],
+            "sourceMap": false
           }
         }
       }
@@ -802,7 +809,8 @@
             "outputPath": "dist/libs/core-plugin",
             "tsConfig": "libs/remix-core-plugin/tsconfig.lib.json",
             "packageJson": "libs/remix-core-plugin/package.json",
-            "main": "libs/remix-core-plugin/src/index.ts"
+            "main": "libs/remix-core-plugin/src/index.ts",
+            "sourceMap": false
           }
         }
       }
