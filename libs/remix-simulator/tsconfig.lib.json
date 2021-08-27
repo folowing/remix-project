@@ -5,7 +5,10 @@
     "outDir": "../../dist/out-tsc",
     "declaration": true,
     "rootDir": ".",
-    "types": ["node", "mocha"]
+    "types": ["node", "mocha"],
+    "sourceMap": false,
+    "inlineSourceMap": true,
+    "inlineSources": true
   },
   "exclude": [
     "**/*.spec.ts",

@@ -7,7 +7,10 @@
     "esModuleInterop": true,
     "declaration": true,
     "rootDir": "./",
-    "types": ["node", "tape"]
+    "types": ["node", "tape"],
+    "sourceMap": false,
+    "inlineSourceMap": true,
+    "inlineSources": true
   },
   "exclude": [
     "**/*.spec.js",
