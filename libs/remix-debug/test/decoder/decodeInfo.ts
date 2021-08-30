@@ -1,6 +1,6 @@
 'use strict'
 import tape from 'tape'
-import { compile } from 'solc'
+import { compile } from 'tron-solc'
 import * as astHelper from '../../src/solidity-decoder/astHelper'
 import * as decodeInfo from '../../src/solidity-decoder/decodeInfo'
 import * as stateDecoder from '../../src/solidity-decoder/stateDecoder'

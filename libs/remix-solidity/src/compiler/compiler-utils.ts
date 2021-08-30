@@ -4,6 +4,7 @@ const minixhr = require('minixhr')
 
 export const baseURLBin = 'https://binaries.soliditylang.org/bin'
 export const baseURLWasm = 'https://binaries.soliditylang.org/wasm'
+export const baseURLTron = 'https://tronsuper.github.io/tron-solc-bin/bin'
 
 export const pathToURL = {}
 
@@ -12,9 +13,9 @@ export const pathToURL = {}
  * @param version is the version of compiler with or without 'soljson-v' prefix and .js postfix
  */
 export function urlFromVersion (version) {
-  if (!version.startsWith('soljson-v')) version = 'soljson-v' + version
+  if (!version.startsWith('soljson_v')) version = 'soljson_v' + version
   if (!version.endsWith('.js')) version = version + '.js'
-  return `${pathToURL[version]}/${version}`
+  return `${pathToURL[version]}/${version.replace(/\+commit.[0-9,a-z]+/g, '')}`
 }
 
 /**
@@ -23,13 +24,7 @@ export function urlFromVersion (version) {
  */
 export function canUseWorker (selectedVersion) {
   const version = semver.coerce(selectedVersion)
-  const isNightly = selectedVersion.includes('nightly')
-  return browserSupportWorker() && (
-    // All compiler versions (including nightlies) after 0.6.3 are wasm compiled
-    semver.gt(version, '0.6.3') ||
-    // Only releases are wasm compiled starting with 0.3.6
-    (semver.gte(version, '0.3.6') && !isNightly)
-  )
+  return browserSupportWorker() && semver.gt(version, '0.5.13')
 }
 
 function browserSupportWorker () {

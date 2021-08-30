@@ -1,7 +1,7 @@
-pragma solidity >= 0.5.0 < 0.8.0;
+pragma solidity >= 0.5.0 < 0.9.0;
 
 contract EvenOdd {
-    
+
     /**
      * @dev Tells whether a number is even or odd
      * @param num Number to check

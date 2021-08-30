@@ -5,7 +5,7 @@ import { toBuffer, addHexPrefix } from '@tvmjs/util'
 import { EventManager } from '../eventManager'
 import { compareByteCode } from '../util'
 import { decodeResponse } from './txFormat'
-import { getFunction, getReceiveInterface, getConstructorInterface, visitContracts, makeFullTypeDefinition } from './txHelper'
+import { getFunction, getReceiveInterface, getConstructorInterface, visitContracts, tMakeFullTypeDefinition, tConvertTypes } from './txHelper'
 
 function addExecutionCosts (txResult, tx, execResult) {
   if (txResult) {
@@ -364,8 +364,11 @@ export class TxListener {
     const inputTypes = []
     for (let i = 0; i < abi.inputs.length; i++) {
       const type = abi.inputs[i].type
-      inputTypes.push(type.indexOf('tuple') === 0 ? makeFullTypeDefinition(abi.inputs[i]) : type)
+      inputTypes.push(type.indexOf('tuple') === 0 ? tMakeFullTypeDefinition(abi.inputs[i]) : type)
     }
+
+    tConvertTypes(inputTypes)
+
     const abiCoder = new ethers.utils.AbiCoder()
     const decoded = abiCoder.decode(inputTypes, data)
     const ret = {}

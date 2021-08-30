@@ -29,7 +29,7 @@ export function nameOpCodes (raw, hardfork) {
 
     const data = (pushData as any).toString('hex') !== '' ? ' ' + (pushData as any).toString('hex') : ''
 
-    code.push(this.pad(pc, this.roundLog(raw.length, 10)) + ' ' + curOpCode + data)
+    code.push(pad(pc, roundLog(raw.length, 10)) + ' ' + curOpCode + data)
     pushData = ''
   }
   return [code, codeMap]
@@ -46,7 +46,7 @@ type Opcode = {
  * information about the opcode.
  */
 export function parseCode (raw) {
-  const common = new Common({ chain: 'mainnet', hardfork: 'london' })
+  const common = new Common({ chain: 'mainnet', hardfork: 'tron' })
   const opcodes = getOpcodesForHF(common)
 
   const code = []

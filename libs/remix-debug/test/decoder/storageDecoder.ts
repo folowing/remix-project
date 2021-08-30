@@ -1,6 +1,6 @@
 'use strict'
 import tape from 'tape'
-import { compile } from 'solc'
+import { compile } from 'tron-solc'
 import * as stateDecoder from '../../src/solidity-decoder/stateDecoder'
 import { MockStorageResolver } from './mockStorageResolver'
 import { compilerInput } from '../helpers/compilerHelper'

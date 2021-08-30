@@ -1,8 +1,8 @@
 'use strict'
 import { ethers } from 'ethers'
-import { encodeParams as encodeParamsHelper, encodeFunctionId, makeFullTypeDefinition } from './txHelper'
+import { encodeParams as encodeParamsHelper, encodeFunctionId, tMakeFullTypeDefinition, tConvertTypes } from './txHelper'
 import { eachOfSeries } from 'async'
-import { linkBytecode as linkBytecodeSolc } from 'solc/linker'
+import { linkBytecode as linkBytecodeSolc } from 'tron-solc/linker'
 import { isValidAddress, addHexPrefix } from '@tvmjs/util'
 
 /**
@@ -360,8 +360,11 @@ export function decodeResponse (response, fnabi) {
       const outputTypes = []
       for (i = 0; i < fnabi.outputs.length; i++) {
         const type = fnabi.outputs[i].type
-        outputTypes.push(type.indexOf('tuple') === 0 ? makeFullTypeDefinition(fnabi.outputs[i]) : type)
+        outputTypes.push(type.indexOf('tuple') === 0 ? tMakeFullTypeDefinition(fnabi.outputs[i]) : type)
       }
+
+      tConvertTypes(outputTypes)
+
       if (!response || !response.length) response = new Uint8Array(32 * fnabi.outputs.length) // ensuring the data is at least filled by 0 cause `AbiCoder` throws if there's not engouh data
       // decode data
       const abiCoder = new ethers.utils.AbiCoder()

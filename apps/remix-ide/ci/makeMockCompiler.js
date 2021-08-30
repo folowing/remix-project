@@ -1,9 +1,9 @@
 'use strict'
 
 var fs = require('fs')
-var compiler = require('solc')
+var compiler = require('tron-solc')
 var compilerInput = require('@remix-project/remix-solidity').CompilerInput
-var defaultVersion = 'soljson-v0.8.4+commit.c7e474f2.js'
+var defaultVersion = 'soljson_v0.8.6+commit.0e36fba.js'
 const path = require('path')
 
 compiler.loadRemoteVersion(defaultVersion, (error, solcSnapshot) => {

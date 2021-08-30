@@ -4,7 +4,7 @@ import { readFileSync } from 'fs'
 import { join } from 'path'
 import { default as StatRunner } from '../../src/solidity-analyzer'
 import * as modules from '../../src/solidity-analyzer/modules/'
-import solc from 'solc';
+import solc from 'tron-solc';
 import { CompilationResult, AnalysisReportObj, AnalysisReport } from '../../src/types'
 const { compilerInput } = helpers.compiler
 const folder: string = 'solidity-v0.5'

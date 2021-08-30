@@ -1,4 +1,4 @@
-pragma solidity >=0.4.22 <0.8.0;
+pragma solidity >=0.4.22 <0.9.0;
 import "remix_tests.sol";
 import "./SafeMath.sol";
 import "./SafeMathProxy.sol";
@@ -64,18 +64,18 @@ contract SafeMathTest {
   function safeSubtractShouldRevertUsingTryCatch() public returns (bool) {
     try safemathproxy.subProxy(0, 1) returns ( uint256 res) {
         Assert.ok(false, "Should revert");
-    } catch (bytes memory /*lowLevelData*/) { 
-        Assert.ok(true, "safe subtract should revert");         
-    }  
+    } catch (bytes memory /*lowLevelData*/) {
+        Assert.ok(true, "safe subtract should revert");
+    }
   }
 
   function safeSubtractShouldNotRevert() public returns (bool) {
     try safemathproxy.subProxy(3, 2) returns ( uint256 res) {
         Assert.equal(res, 1, "should be equal to 1");
-    } catch (bytes memory /*lowLevelData*/) { 
+    } catch (bytes memory /*lowLevelData*/) {
         Assert.ok(false, "safe subtract should not revert");
-    }  
-  } 
+    }
+  }
 
   function unsafeAdditionShouldOverflow() public returns (bool) {
     uint256 a = 1;

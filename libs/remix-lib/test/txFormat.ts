@@ -3,19 +3,21 @@ import tape from 'tape'
 import * as txFormat from '../src/execution/txFormat'
 import * as txHelper from '../src/execution/txHelper'
 import { hexToIntArray } from '../src/util'
-let compiler = require('solc')
 import { compilerInput } from '../src/helpers/compilerHelper'
-const solidityVersion = 'v0.6.0+commit.26b70077'
+
+const compiler = require('tron-solc')
+/** default solc version is v0.8.6+commit.0e36fba, do not need to load from Remote, waste of time**/
+// const solidityVersion = 'v0.8.6+commit.0e36fba'
 
 /* tape *********************************************************** */
-tape('load compiler ' + solidityVersion, function (t) {
-  compiler.loadRemoteVersion(solidityVersion, (error, solcSnapshot) => {
-    if (error) console.log(error)
-    console.warn('testing *txFormat* against', solidityVersion)
-    compiler = solcSnapshot
-    t.end()
-  })
-})
+// tape('load compiler ' + solidityVersion, function (t) {
+//   compiler.loadRemoteVersion(solidityVersion, (error, solcSnapshot) => {
+//     if (error) console.log(error)
+//     console.warn('testing *txFormat* against', solidityVersion)
+//     compiler = solcSnapshot
+//     t.end()
+//   })
+// })
 
 let context
 tape('ContractParameters - (TxFormat.buildData) - format input parameters', function (t) {
@@ -44,7 +46,6 @@ function testWithInput (st, params, expected) {
     }
   }, () => {}, () => {})
 }
-
 
 tape('ContractStringParameters - (TxFormat.buildData) - format string input parameters', function (t) {
   let output = compiler.compile(compilerInput(stringContract))
@@ -101,7 +102,7 @@ function testWithArrayInput (st, params, expected) {
 tape('ContractNestedArrayParameters - (TxFormat.buildData) - format nested array input parameters', function (t) {
   let output = compiler.compile(compilerInput(nestedArrayContract))
   output = JSON.parse(output)
-  let contract = output.contracts['test.sol']['nestedArrayContractTest']
+  const contract = output.contracts['test.sol']['nestedArrayContractTest']
   context = { output, contract }
   t.test('(TxFormat.buildData)', function (st) {
     st.plan(2)
@@ -127,7 +128,7 @@ function testWithNestedArrayInput (st, params, expected) {
 tape('abiEncoderV2InvalidTuple - (TxFormat.buildData) - should throw error for invalid tuple value', function (t) {
   let output = compiler.compile(compilerInput(abiEncoderV2InvalidTuple))
   output = JSON.parse(output)
-  let contract = output.contracts['test.sol']['test']
+  const contract = output.contracts['test.sol']['test']
   context = { output, contract }
   t.test('(TxFormat.buildData)', function (st) {
     st.plan(4)
@@ -183,7 +184,7 @@ tape('ContractParameters - (TxFormat.buildData) - link Libraries', function (t) 
 
 function testLinkLibrary (st, fakeDeployedContracts, callbackDeployLibraries) {
   const deployMsg = ['creation of library test.sol:lib1 pending...',
-  'creation of library test.sol:lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2 pending...']
+    'creation of library test.sol:lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2 pending...']
   txFormat.buildData('testContractLinkLibrary', context.contract, context.output.contracts, true, context.contract.abi[0], '', (error, data) => {
     if (error) { return st.fails(error) }
     console.log(data)
@@ -204,15 +205,15 @@ function testLinkLibrary (st, fakeDeployedContracts, callbackDeployLibraries) {
 function testLinkLibrary2 (st, callbackDeployLibraries) {
   const librariesReference = {
     'test.sol': {
-      'lib1': '0xf7a10e525d4b168f45f74db1b61f63d3e7619e11',
-      'lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2': '0xf7a10e525d4b168f45f74db1b61f63d3e7619e33'
+      lib1: '0xf7a10e525d4b168f45f74db1b61f63d3e7619e11',
+      lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2: '0xf7a10e525d4b168f45f74db1b61f63d3e7619e33'
     }
   }
 
-  const data = '608060405234801561001057600080fd5b506101e2806100206000396000f3fe608060405234801561001057600080fd5b506004361061002b5760003560e01c80636d4ce63c14610030575b600080fd5b61003861003a565b005b73f7a10e525d4b168f45f74db1b61f63d3e7619e116344733ae16040518163ffffffff1660e01b815260040160006040518083038186803b15801561007e57600080fd5b505af4158015610092573d6000803e3d6000fd5b5050505073f7a10e525d4b168f45f74db1b61f63d3e7619e336344733ae16040518163ffffffff1660e01b815260040160006040518083038186803b1580156100da57600080fd5b505af41580156100ee573d6000803e3d6000fd5b5050505073f7a10e525d4b168f45f74db1b61f63d3e7619e336344733ae16040518163ffffffff1660e01b815260040160006040518083038186803b15801561013657600080fd5b505af415801561014a573d6000803e3d6000fd5b5050505073f7a10e525d4b168f45f74db1b61f63d3e7619e116344733ae16040518163ffffffff1660e01b815260040160006040518083038186803b15801561019257600080fd5b505af41580156101a6573d6000803e3d6000fd5b5050505056fea264697066735822122007784c53df7f324243100f6642d889a08a88831c3811dd13eebe3163b7eb2e5464736f6c63430006000033'
+  const data = '608060405234801561001057600080fd5b50d3801561001d57600080fd5b50d2801561002a57600080fd5b506101fc8061003a6000396000f3fe608060405234801561001057600080fd5b50d3801561001d57600080fd5b50d2801561002a57600080fd5b50600436106100455760003560e01c80636d4ce63c1461004a575b600080fd5b610052610054565b005b73f7a10e525d4b168f45f74db1b61f63d3e7619e116344733ae16040518163ffffffff1660e01b815260040160006040518083038186803b15801561009857600080fd5b505af41580156100ac573d6000803e3d6000fd5b5050505073f7a10e525d4b168f45f74db1b61f63d3e7619e336344733ae16040518163ffffffff1660e01b815260040160006040518083038186803b1580156100f457600080fd5b505af4158015610108573d6000803e3d6000fd5b5050505073f7a10e525d4b168f45f74db1b61f63d3e7619e336344733ae16040518163ffffffff1660e01b815260040160006040518083038186803b15801561015057600080fd5b505af4158015610164573d6000803e3d6000fd5b5050505073f7a10e525d4b168f45f74db1b61f63d3e7619e116344733ae16040518163ffffffff1660e01b815260040160006040518083038186803b1580156101ac57600080fd5b505af41580156101c0573d6000803e3d6000fd5b5050505056fea26474726f6e582212200d27ec8555812429446271153ba5458f32c378ffd9ea820a1f227a54dab1946364736f6c63430008060033'
 
   const deployMsg = ['creation of library test.sol:lib1 pending...',
-  'creation of library test.sol:lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2 pending...']
+    'creation of library test.sol:lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2_lib2 pending...']
   txFormat.encodeConstructorCallAndLinkLibraries(context.contract, '', context.contract.abi[0], librariesReference, context.contract.evm.bytecode.linkReferences, (error, result) => {
     console.log(error, result)
     st.equal(data, result.dataHex)
@@ -286,12 +287,12 @@ tape('test abiEncoderV2', function (t) {
     st.plan(2)
     let output = compiler.compile(compilerInput(abiEncoderV2))
     output = JSON.parse(output)
-    let contract = output.contracts['test.sol']['test']
+    const contract = output.contracts['test.sol']['test']
     txFormat.encodeFunctionCall(decodedData, contract.abi[0], (error, encoded) => {
       console.log(error)
       st.equal(encoded.dataHex, functionId + encodedData.replace('0x', ''))
     })
-    let decoded = txFormat.decodeResponse(hexToIntArray(encodedData), contract.abi[0])
+    const decoded = txFormat.decodeResponse(hexToIntArray(encodedData), contract.abi[0])
     console.log(decoded)
     st.equal(decoded[0], `tuple(uint256,uint256,string): ${value1},${value2},${value3}`)
   })
@@ -374,7 +375,7 @@ const nestedArrayContract = `contract nestedArrayContractTest {
   }
 }`
 
-const deploySimpleLib = `pragma solidity >= 0.5.0 < 0.7.0;
+const deploySimpleLib = `pragma solidity >= 0.5.0 < 0.9.0;
 
 library lib1 {
     function getEmpty () public {
@@ -395,14 +396,14 @@ contract testContractLinkLibrary {
  }
  }`
 
-const encodeFunctionCall = `pragma solidity >= 0.5.0 < 0.7.0;
+const encodeFunctionCall = `pragma solidity >= 0.8.0 < 0.9.0;
 
 contract testContractLinkLibrary {
     function get (uint _p, string memory _o) public {
     }
  }`
 
-const fallbackAndReceiveFunction = `pragma solidity >= 0.5.0 < 0.7.0;
+const fallbackAndReceiveFunction = `pragma solidity >= 0.8.0 < 0.9.0;
 
 contract fallbackAndReceiveFunctionContract {
     function get (uint _p, string memory _o) public {

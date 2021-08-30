@@ -17,7 +17,7 @@ export function forkAt (networkId, blockNumber) {
     }
     return currentForkName
   }
-  return 'london'
+  return 'tron'
 }
 
 // see https://github.com/ethereum/go-ethereum/blob/master/params/config.go

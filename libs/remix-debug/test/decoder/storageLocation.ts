@@ -1,6 +1,6 @@
 'use strict'
 import tape from 'tape'
-var compiler = require('solc')
+var compiler = require('tron-solc')
 var stateDecoder = require('../../src/solidity-decoder/stateDecoder')
 var contracts = require('./contracts/miscContracts')
 var compilerInput = require('../helpers/compilerHelper').compilerInput

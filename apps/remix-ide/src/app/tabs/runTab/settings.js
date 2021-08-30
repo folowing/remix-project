@@ -102,18 +102,9 @@ class SettingsUI {
               title="Execution environment does not connect to any node, everything is local and in memory only."
               value="vm-london" name="executionContext" fork="london"> JavaScript VM (London)
             </option>
-            <option id="vm-mode-berlin" data-id="settingsVMBerlinMode"
-              title="Execution environment does not connect to any node, everything is local and in memory only."
-              value="vm-berlin" name="executionContext" fork="berlin" > JavaScript VM (Berlin)
-            </option>
             <option id="injected-mode" data-id="settingsInjectedMode"
-              title="Execution environment has been provided by Metamask or similar provider."
-              value="injected" name="executionContext"> Injected Web3
-            </option>
-            <option id="web3-mode" data-id="settingsWeb3Mode"
-              title="Execution environment connects to node at localhost (or via IPC if available), transactions will be sent to the network and can cause loss of money or worse!
-              If this page is served via https and you access your node via http, it might not work. In this case, try cloning the repository and serving it via http."
-              value="web3" name="executionContext"> Web3 Provider
+              title="Execution environment has been provided by TronLink or similar provider."
+              value="injected" name="executionContext"> Injected TronWeb
             </option>
           </select>
           <a href="https://remix-ide.readthedocs.io/en/latest/run.html#run-setup" target="_blank"><i class="${css.infoDeployAction} ml-2 fas fa-info" title="check out docs to setup Environment"></i></a>

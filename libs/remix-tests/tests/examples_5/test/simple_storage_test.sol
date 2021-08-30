@@ -1,4 +1,4 @@
-pragma solidity >= 0.5.0 < 0.8.0;
+pragma solidity >= 0.5.0 < 0.9.0;
 import "./../contract/simple_storage.sol";
 
 contract StorageResolveTest {
@@ -11,7 +11,7 @@ contract StorageResolveTest {
   function initialValueShouldBe100() public returns (bool) {
     return Assert.equal(foo.get(), 100, "initial value is not correct");
   }
-  
+
   //Test imported contract functions
   function checkIfEven() public returns (bool) {
     return Assert.equal(foo.check(10), 'EVEN', "value is odd");

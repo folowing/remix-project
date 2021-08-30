@@ -403,7 +403,7 @@ class Blockchain {
         if (self.transactionContextAPI.getGasLimit) {
           return self.transactionContextAPI.getGasLimit(next)
         }
-        next(null, 3000000)
+        next(null, 400000000)
       },
       function queryValue (gasLimit, next) {
         if (args.value) {
