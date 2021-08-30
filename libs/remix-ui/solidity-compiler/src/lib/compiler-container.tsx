@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, useReducer } from 'react' // eslint
 import semver from 'semver'
 import { CompilerContainerProps, ConfigurationSettings } from './types'
 import * as helper from '../../../../../apps/remix-ide/src/lib/helper'
-import { canUseWorker, baseURLBin, baseURLWasm, urlFromVersion, pathToURL, promisedMiniXhr } from '@remix-project/remix-solidity'
+import { canUseWorker, baseURLTron, urlFromVersion, pathToURL, promisedMiniXhr } from '@remix-project/remix-solidity'
 import { compilerReducer, compilerInitialState } from './reducers/compiler'
 import { resetEditorMode, listenToEvents } from './actions/compiler'
 import { OverlayTrigger, Tooltip } from 'react-bootstrap' // eslint-disable-line
@@ -28,7 +28,7 @@ export const CompilerContainer = (props: CompilerContainerProps) => {
     allversions: [],
     customVersions: [],
     selectedVersion: null,
-    defaultVersion: 'soljson-v0.8.4+commit.c7e474f2.js', // this default version is defined: in makeMockCompiler (for browser test)
+    defaultVersion: 'soljson_v0.8.6+commit.0e36fba.js', // this default version is defined: in makeMockCompiler (for browser test)
     selectedLanguage: '',
     runs: '',
     compiledFileName: '',
@@ -136,49 +136,33 @@ export const CompilerContainer = (props: CompilerContainerProps) => {
   }, [configurationSettings])
 
   // fetching both normal and wasm builds and creating a [version, baseUrl] map
-  const fetchAllVersion = async (callback) => {
-    let selectedVersion, allVersionsWasm, isURL
-    let allVersions = [{ path: 'builtin', longVersion: 'latest local version - 0.7.4' }]
+  const fetchAllVersion = async callback => {
+    let selectedVersion;
+    let allVersions: any = [
+      { path: 'builtin', longVersion: 'latest local version - 0.8.6' }
+    ];
     // fetch normal builds
-    const binRes: any = await promisedMiniXhr(`${baseURLBin}/list.json`)
-    // fetch wasm builds
-    const wasmRes: any = await promisedMiniXhr(`${baseURLWasm}/list.json`)
-    if (binRes.event.type === 'error' && wasmRes.event.type === 'error') {
-      selectedVersion = 'builtin'
-      return callback(allVersions, selectedVersion)
-    }
-    try {
-      const versions = JSON.parse(binRes.json).builds.slice().reverse()
+    const binRes: any = await promisedMiniXhr(`${baseURLTron}/list.json`);
+    if (binRes.event.type === 'error') {
+      selectedVersion = 'builtin';
+      return callback(allVersions, selectedVersion);
+    } else {
+      try {
+        const versions = JSON.parse(binRes.json).builds.slice().reverse()
+        allVersions = [...allVersions, ...versions]
 
-      allVersions = [...allVersions, ...versions]
-      selectedVersion = state.defaultVersion
-      if (queryParams.get().version) selectedVersion = queryParams.get().version
-      // Check if version is a URL and corresponding filename starts with 'soljson'
-      if (selectedVersion.startsWith('https://')) {
-        const urlArr = selectedVersion.split('/')
-
-        if (urlArr[urlArr.length - 1].startsWith('soljson')) isURL = true
+        allVersions.forEach(_ => {
+          pathToURL[_.path] = baseURLTron
+        });
+      } catch (e) {
+        tooltip(
+          'Cannot load compiler version list. It might have been blocked by an advertisement blocker. Please try deactivating any of them from this page and reload. Error: ' +
+            e
+        );
       }
-      if (wasmRes.event.type !== 'error') {
-        allVersionsWasm = JSON.parse(wasmRes.json).builds.slice().reverse()
-      }
-    } catch (e) {
-      tooltip('Cannot load compiler version list. It might have been blocked by an advertisement blocker. Please try deactivating any of them from this page and reload. Error: ' + e)
     }
-    // replace in allVersions those compiler builds which exist in allVersionsWasm with new once
-    if (allVersionsWasm && allVersions) {
-      allVersions.forEach((compiler, index) => {
-        const wasmIndex = allVersionsWasm.findIndex(wasmCompiler => { return wasmCompiler.longVersion === compiler.longVersion })
-        if (wasmIndex !== -1) {
-          allVersions[index] = allVersionsWasm[wasmIndex]
-          pathToURL[compiler.path] = baseURLWasm
-        } else {
-          pathToURL[compiler.path] = baseURLBin
-        }
-      })
-    }
-    callback(allVersions, selectedVersion, isURL)
-  }
+    callback(allVersions, selectedVersion);
+  };
 
   /**
    * Update the compilation button with the name of the current file
