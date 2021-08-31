@@ -16,13 +16,13 @@
   "dependencies": {
     "@tvmjs/block": "3.4.0",
     "@tvmjs/tx": "3.3.0",
-    "async": "^2.1.2",
     "@tvmjs/util": "7.1.0",
+    "async": "^2.1.2",
     "ethers": "^5.4.2",
-    "events": "^3.0.0",
     "tron-solc": "0.8.6",
     "string-similarity": "^4.0.4",
-    "web3": "^1.5.1"
+    "web3": "^1.5.1",
+    "ethjs-util": "^0.1.5"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
