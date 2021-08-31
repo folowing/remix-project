@@ -404,12 +404,11 @@ describe('testRunner', () => {
 
       afterAll(() => { tests = [] })
 
-      it('should have 7 passing tests', () => {
-        // 0.8.7 add some check, so some case failed
-        assert.equal(results.passingNum, 7)
+      it('should have 10 passing tests', () => {
+        assert.equal(results.passingNum, 10)
       })
-      it('should have 3 failing tests', () => {
-        assert.equal(results.failureNum, 3)
+      it('should have 0 failing tests', () => {
+        assert.equal(results.failureNum, 0)
       })
     })
 

@@ -13,11 +13,13 @@ contract SafeMathTest {
   function unsafeMultiplicationShouldOverflow() public returns (bool) {
     uint256 a = 4;
     uint256 b = 2 ** 256 - 1;
-    return Assert.equal(
-      a * b,
-      2 ** 256 - 4,
-      "unsafe multiplication did not overflow"
-    );
+    unchecked {
+      return Assert.equal(
+        a * b,
+        2 ** 256 - 4,
+        "unsafe multiplication did not overflow"
+      );
+    }
   }
 
   function safeMultiplicationShouldRevert() public returns (bool) {
@@ -44,12 +46,14 @@ contract SafeMathTest {
 
   function unsafeSubtractShouldUnderflow() public returns (bool) {
     uint256 a = 0;
-    uint256 b = a - 1;
-    return Assert.equal(
-      b,
-      2 ** 256 - 1,
-      "unsafe subtraction did not underflow"
-    );
+    unchecked {
+      uint256 b = a - 1;
+      return Assert.equal(
+        b,
+        2 ** 256 - 1,
+        "unsafe subtraction did not underflow"
+      );
+    }
   }
 
   function safeSubtractShouldRevert() public returns (bool) {
@@ -80,7 +84,9 @@ contract SafeMathTest {
   function unsafeAdditionShouldOverflow() public returns (bool) {
     uint256 a = 1;
     uint256 b = 2 ** 256 - 1;
-    return Assert.equal(a + b, 0, "unsafe addition did not overflow");
+    unchecked {
+      return Assert.equal(a + b, 0, "unsafe addition did not overflow");
+    }
   }
 
   function safeAdditionShouldRevert() public returns (bool) {
