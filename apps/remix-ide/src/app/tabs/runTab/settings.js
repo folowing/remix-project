@@ -98,9 +98,9 @@ class SettingsUI {
         </label>
         <div class="${css.environment}">
           <select id="selectExEnvOptions" data-id="settingsSelectEnvOptions" class="form-control ${css.select} custom-select">
-            <option id="vm-mode-london" data-id="settingsVMLondonMode"
+            <option id="vm-mode-tron" data-id="settingsVMLondonMode"
               title="Execution environment does not connect to any node, everything is local and in memory only."
-              value="vm-london" name="executionContext" fork="london"> JavaScript VM (London)
+              value="vm-tron" name="executionContext" fork="tron"> JavaScript VM (Tron)
             </option>
             <option id="injected-mode" data-id="settingsInjectedMode"
               title="Execution environment has been provided by TronLink or similar provider."
