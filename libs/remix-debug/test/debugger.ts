@@ -9,7 +9,7 @@ var compiler = require('tron-solc')
 var vmCall = require('./vmCall')
 var remixLib = require('@remix-project/remix-lib')
 
-var ballot = `pragma solidity >=0.4.22 <0.8.0;
+var ballot = `pragma solidity >=0.4.22 <0.9.0;
 
 /** 
  * @title Ballot
@@ -211,9 +211,6 @@ function testDebugging (debugManager) {
       const callstack = debugManager.traceManager.getStackAt(41)
       t.equal(JSON.stringify(callstack), JSON.stringify([
         '0x0000000000000000000000000000000000000000000000000000000000000080',
-        '0x0000000000000000000000000000000000000000000000000000000000000020',
-        '0x0000000000000000000000000000000000000000000000000000000000000080',
-        '0x00000000000000000000000000000000000000000000000000000000000000e0',
         '0x00000000000000000000000000000000000000000000000000000000000000e0']))
     } catch (error) {
       return t.end(error)
@@ -225,9 +222,10 @@ function testDebugging (debugManager) {
     t.plan(1)
 
     try {
-      const address = debugManager.traceManager.getCurrentCalledAddressAt(38)
+      const address = debugManager.traceManager.getCurrentCalledAddressAt(52)
       console.log(address)
-      var storageView = debugManager.storageViewAt(196, address)
+      // find the 'MSTORE' command
+      var storageView = debugManager.storageViewAt(375, address)
 
       storageView.storageRange().then((storage) => {
         t.equal(JSON.stringify(storage), JSON.stringify({ '0x290decd9548b62a8d60345a988386fc84ba6bc95484008f6362f93160ef3e563': { key: '0x0000000000000000000000000000000000000000000000000000000000000000', value: '0x0000000000000000000000004b0897b0513fdc7c541b6d9d7e929c4e5364d2db' } }))
@@ -242,8 +240,9 @@ function testDebugging (debugManager) {
   tape('traceManager.decodeStateAt', async (t) => {
     t.plan(7)
     try {
-      const state = await debugManager.extractStateAt(312)
-      const decodedState = await debugManager.decodeStateAt(312, state)
+      // find the second to last [JUMP JUMPDEST]
+      const state = await debugManager.extractStateAt(528)
+      const decodedState = await debugManager.decodeStateAt(528, state)
       console.log(decodedState)
       t.equal(decodedState['chairperson'].value, '0x4B0897B0513FDC7C541B6D9D7E929C4E5364D2DB')
       t.equal(decodedState['chairperson'].type, 'address')
@@ -261,10 +260,12 @@ function testDebugging (debugManager) {
     t.plan(1)
     const tested = JSON.parse('{"proposalNames":{"value":[{"value":"0x48656C6C6F20576F726C64210000000000000000000000000000000000000000","type":"bytes32"}],"length":"0x1","type":"bytes32[]","cursor":1,"hasNext":false},"p":{"value":"45","type":"uint256"},"addressLocal":{"value":"0x4B0897B0513FDC7C541B6D9D7E929C4E5364D2DB","type":"address"},"i":{"value":"2","type":"uint256"},"proposalsLocals":{"value":[{"value":{"name":{"value":"0x48656C6C6F20576F726C64210000000000000000000000000000000000000000","type":"bytes32"},"voteCount":{"value":"0","type":"uint256"}},"type":"struct Ballot.Proposal"}],"length":"0x1","type":"struct Ballot.Proposal[]"}}')
     try {
-      const address = debugManager.traceManager.getCurrentCalledAddressAt(327)
-      const location = await debugManager.sourceLocationFromVMTraceIndex(address, 327)
-      debugManager.decodeLocalsAt(327, location, (error, decodedlocals) => {
+      // find last POP
+      const address = debugManager.traceManager.getCurrentCalledAddressAt(543)
+      const location = await debugManager.sourceLocationFromVMTraceIndex(address, 543)
+      debugManager.decodeLocalsAt(543, location, (error, decodedlocals) => {
         if (error) return t.end(error)
+        console.log(JSON.stringify(decodedlocals))
         t.ok(deepequal(decodedlocals, tested), `locals does not match. expected: ${JSON.stringify(tested)} - current: ${decodedlocals}`)
       })
     } catch (error) {
@@ -288,8 +289,8 @@ function testDebugging (debugManager) {
 
     breakPointManager.event.register('breakpointHit', function (sourceLocation, step) {
       console.log('breakpointHit')
-      t.equal(JSON.stringify(sourceLocation), JSON.stringify({ start: 1153, length: 6, file: 0, jump: '-' }))
-      t.equal(step, 212)
+      t.equal(JSON.stringify(sourceLocation), JSON.stringify({ start: 1153, length: 6, jump: '-', file: 0 }))
+      t.equal(step, 391)
     })
 
     breakPointManager.event.register('noBreakpointHit', function () {
