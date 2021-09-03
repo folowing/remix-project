@@ -69,7 +69,7 @@
     "@types/web3": "^1.0.18",
     "mocha": "^5.1.0",
     "ts-node": "^8.10.2",
-    "typescript": "^3.3.1"
+    "typescript": "^3.9.10"
   },
   "typings": "src/index.d.ts",
   "gitHead": "df7abe1c219e361a947031d620f4ae6e3786a4d7"
