@@ -8,7 +8,6 @@ import { bufferToHex, keccakFromString } from '@tvmjs/util'
 import { checkSpecialChars, checkSlash } from '../../lib/helper'
 const { RemixdHandle } = require('../files/remixd-handle.js')
 const { GitHandle } = require('../files/git-handle.js')
-const { HardhatHandle } = require('../files/hardhat-handle.js')
 const { SlitherHandle } = require('../files/slither-handle.js')
 const globalRegistry = require('../../global/registry')
 const examples = require('../editor/examples')
@@ -59,7 +58,6 @@ module.exports = class Filepanel extends ViewPlugin {
 
     this.remixdHandle = new RemixdHandle(this._deps.fileProviders.localhost, appManager)
     this.gitHandle = new GitHandle()
-    this.hardhatHandle = new HardhatHandle()
     this.slitherHandle = new SlitherHandle()
     this.registeredMenuItems = []
     this.removedMenuItems = []

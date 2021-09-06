@@ -4,6 +4,7 @@ import { IframePlugin } from '@remixproject/engine-web'
 import { EventEmitter } from 'events'
 import QueryParams from './lib/query-params'
 import { PermissionHandler } from './app/ui/persmission-handler'
+import pluginsList from './metadata.json'
 const _paq = window._paq = window._paq || []
 
 const requiredModules = [ // services + layout views + system views
@@ -14,7 +15,7 @@ const requiredModules = [ // services + layout views + system views
 const dependentModules = ['git', 'hardhat'] // module which shouldn't be manually activated (e.g git is activated by remixd)
 
 export function isNative (name) {
-  const nativePlugins = ['vyper', 'workshops', 'debugger', 'remixd', 'menuicons', 'solidity', 'hardhat-provider']
+  const nativePlugins = ['vyper', 'workshops', 'debugger', 'remixd', 'menuicons', 'solidity']
   return nativePlugins.includes(name) || requiredModules.includes(name)
 }
 
@@ -38,7 +39,6 @@ export class RemixAppManager extends PluginManager {
   constructor () {
     super()
     this.event = new EventEmitter()
-    this.pluginsDirectory = 'https://raw.githubusercontent.com/ethereum/remix-plugins-directory/master/build/metadata.json'
     this.pluginLoader = new PluginLoader()
     this.permissionHandler = new PermissionHandler()
   }
@@ -107,28 +107,13 @@ export class RemixAppManager extends PluginManager {
   }
 
   async registeredPlugins () {
-    let plugins
-    try {
-      const res = await fetch(this.pluginsDirectory)
-      plugins = await res.json()
-      plugins = plugins.filter((plugin) => {
-        if (plugin.targets && Array.isArray(plugin.targets) && plugin.targets.length > 0) {
-          return (plugin.targets.includes('remix'))
-        }
-        return true
-      })
-      localStorage.setItem('plugins-directory', JSON.stringify(plugins))
-    } catch (e) {
-      console.log('getting plugins list from localstorage...')
-      const savedPlugins = localStorage.getItem('plugins-directory')
-      if (savedPlugins) {
-        try {
-          plugins = JSON.parse(savedPlugins)
-        } catch (e) {
-          console.error(e)
-        }
+    let plugins = pluginsList
+    plugins = plugins.filter((plugin) => {
+      if (plugin.targets && Array.isArray(plugin.targets) && plugin.targets.length > 0) {
+        return (plugin.targets.includes('remix'))
       }
-    }
+      return true
+    })
     return plugins.map(plugin => {
       return new IframePlugin(plugin)
     })
