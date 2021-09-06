@@ -28,16 +28,7 @@ class DropdownLogic {
     this.runView.on('solidity', 'compilationFinished', (file, source, languageVersion, data) =>
       broadcastCompilationResult(file, source, languageVersion, data)
     )
-    this.runView.on('vyper', 'compilationFinished', (file, source, languageVersion, data) =>
-      broadcastCompilationResult(file, source, languageVersion, data)
-    )
-    this.runView.on('lexon', 'compilationFinished', (file, source, languageVersion, data) =>
-      broadcastCompilationResult(file, source, languageVersion, data)
-    )
     this.runView.on('yulp', 'compilationFinished', (file, source, languageVersion, data) =>
-      broadcastCompilationResult(file, source, languageVersion, data)
-    )
-    this.runView.on('optimism-compiler', 'compilationFinished', (file, source, languageVersion, data) =>
       broadcastCompilationResult(file, source, languageVersion, data)
     )
   }

@@ -11,7 +11,6 @@ const modalDialogCustom = require('../modal-dialog-custom')
 const modalDialog = require('../modaldialog')
 const tooltip = require('../tooltip')
 const GistHandler = require('../../../lib/gist-handler')
-const QueryParams = require('../../../lib/query-params.js')
 const _paq = window._paq = window._paq || []
 
 const css = csjs`
@@ -216,10 +215,7 @@ export class LandingPage extends ViewPlugin {
 
     const invertNum = (themeQuality === 'dark') ? 1 : 0
     if (this.solEnv.getElementsByTagName('img')[0]) this.solEnv.getElementsByTagName('img')[0].style.filter = `invert(${invertNum})`
-    if (this.optimismEnv.getElementsByTagName('img')[0]) this.optimismEnv.getElementsByTagName('img')[0].style.filter = `invert(${invertNum})`
     if (this.solhintEnv.getElementsByTagName('img')[0]) this.solhintEnv.getElementsByTagName('img')[0].style.filter = `invert(${invertNum})`
-    if (this.learnEthEnv.getElementsByTagName('img')[0]) this.learnEthEnv.getElementsByTagName('img')[0].style.filter = `invert(${invertNum})`
-    if (this.sourcifyEnv.getElementsByTagName('img')[0]) this.sourcifyEnv.getElementsByTagName('img')[0].style.filter = `invert(${invertNum})`
     if (this.moreEnv.getElementsByTagName('img')[0]) this.moreEnv.getElementsByTagName('img')[0].style.filter = `invert(${invertNum})`
     if (this.websiteIcon) this.websiteIcon.style.filter = `invert(${invertNum})`
   }
@@ -277,25 +273,10 @@ export class LandingPage extends ViewPlugin {
       this.verticalIcons.select('solidity')
       _paq.push(['trackEvent', 'pluginManager', 'userActivate', 'solidity'])
     }
-    const startOptimism = async () => {
-      await this.appManager.activatePlugin('optimism-compiler')
-      this.verticalIcons.select('optimism-compiler')
-      _paq.push(['trackEvent', 'pluginManager', 'userActivate', 'optimism-compiler'])
-    }
     const startSolhint = async () => {
       await this.appManager.activatePlugin(['solidity', 'solhint'])
       this.verticalIcons.select('solhint')
       _paq.push(['trackEvent', 'pluginManager', 'userActivate', 'solhint'])
-    }
-    const startLearnEth = async () => {
-      await this.appManager.activatePlugin(['solidity', 'LearnEth', 'solidityUnitTesting'])
-      this.verticalIcons.select('LearnEth')
-      _paq.push(['trackEvent', 'pluginManager', 'userActivate', 'learnEth'])
-    }
-    const startSourceVerify = async () => {
-      await this.appManager.activatePlugin(['solidity', 'source-verification'])
-      this.verticalIcons.select('source-verification')
-      _paq.push(['trackEvent', 'pluginManager', 'userActivate', 'source-verification'])
     }
     const startPluginManager = async () => {
       await this.appManager.activatePlugin('pluginManager')
@@ -363,7 +344,6 @@ export class LandingPage extends ViewPlugin {
       globalRegistry.get('themeModule').api.fixInvert(document.getElementById('remixLogo'))
       globalRegistry.get('themeModule').api.fixInvert(document.getElementById('solidityLogo'))
       globalRegistry.get('themeModule').api.fixInvert(document.getElementById('debuggerLogo'))
-      globalRegistry.get('themeModule').api.fixInvert(document.getElementById('learnEthLogo'))
       globalRegistry.get('themeModule').api.fixInvert(document.getElementById('workshopLogo'))
       globalRegistry.get('themeModule').api.fixInvert(document.getElementById('moreLogo'))
       globalRegistry.get('themeModule').api.fixInvert(document.getElementById('solhintLogo'))
@@ -385,20 +365,14 @@ export class LandingPage extends ViewPlugin {
     // main
     this.solEnv = createLargeButton('assets/img/solidityLogo.webp', 'solidityLogo', 'Solidity', startSolidity)
     // Featured
-    this.optimismEnv = createLargeButton('assets/img/optimismLogo.webp', 'optimismLogo', 'Optimism', startOptimism)
     this.solhintEnv = createLargeButton('assets/img/solhintLogo.png', 'solhintLogo', 'Solhint linter', startSolhint)
-    this.learnEthEnv = createLargeButton('assets/img/learnEthLogo.webp', 'learnEthLogo', 'LearnEth', startLearnEth)
-    this.sourcifyEnv = createLargeButton('assets/img/sourcifyLogo.webp', 'sourcifyLogo', 'Sourcify', startSourceVerify)
     this.moreEnv = createLargeButton('assets/img/moreLogo.webp', 'moreLogo', 'More', startPluginManager)
     this.websiteIcon = yo`<img id='remixHhomeWebsite' class="mr-1 ${css.image}" src="${profile.icon}"></img>`
 
     const themeQuality = globalRegistry.get('themeModule').api.currentTheme().quality
     const invertNum = (themeQuality === 'dark') ? 1 : 0
     this.solEnv.getElementsByTagName('img')[0].style.filter = `invert(${invertNum})`
-    this.optimismEnv.getElementsByTagName('img')[0].style.filter = `invert(${invertNum})`
     this.solhintEnv.getElementsByTagName('img')[0].style.filter = `invert(${invertNum})`
-    this.learnEthEnv.getElementsByTagName('img')[0].style.filter = `invert(${invertNum})`
-    this.sourcifyEnv.getElementsByTagName('img')[0].style.filter = `invert(${invertNum})`
     this.moreEnv.getElementsByTagName('img')[0].style.filter = `invert(${invertNum})`
     this.websiteIcon.style.filter = `invert(${invertNum})`
 
@@ -498,10 +472,7 @@ export class LandingPage extends ViewPlugin {
                     <h4>Featured Plugins</h4>
                     <div class="d-flex flex-row pt-2">
                       ${this.solEnv}
-                      ${this.optimismEnv}
-                      ${this.learnEthEnv}
                       ${this.solhintEnv}
-                      ${this.sourcifyEnv}
                       ${this.moreEnv}
                     </div>
                   </div>
