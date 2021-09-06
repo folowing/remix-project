@@ -265,7 +265,6 @@ function testDebugging (debugManager) {
       const location = await debugManager.sourceLocationFromVMTraceIndex(address, 543)
       debugManager.decodeLocalsAt(543, location, (error, decodedlocals) => {
         if (error) return t.end(error)
-        console.log(JSON.stringify(decodedlocals))
         t.ok(deepequal(decodedlocals, tested), `locals does not match. expected: ${JSON.stringify(tested)} - current: ${decodedlocals}`)
       })
     } catch (error) {
