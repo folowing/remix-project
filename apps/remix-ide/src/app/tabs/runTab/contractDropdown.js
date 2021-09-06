@@ -21,7 +21,6 @@ class ContractDropdownUI {
     this.event = new EventManager()
 
     this.listenToEvents()
-    this.ipfsCheckedState = false
     this.exEnvironment = blockchain.getProvider()
     this.listenToContextChange()
     this.loadType = 'other'
@@ -56,28 +55,7 @@ class ContractDropdownUI {
       }
       this.exEnvironment = this.blockchain.getProvider()
       this.networkName = network.name
-
-      const savedConfig = window.localStorage.getItem(`ipfs/${this.exEnvironment}/${this.networkName}`)
-
-      // check if an already selected option exist else use default workflow
-      if (savedConfig !== null) {
-        this.setCheckedState(savedConfig)
-      } else {
-        this.setCheckedState(this.networkName === 'Main')
-      }
     })
-  }
-
-  setCheckedState (value) {
-    value = value === 'true' ? true : value === 'false' ? false : value
-    this.ipfsCheckedState = value
-    if (this.ipfsCheckbox) this.ipfsCheckbox.checked = value
-  }
-
-  toggleCheckedState () {
-    if (this.exEnvironment === 'vm') this.networkName = 'VM'
-    this.ipfsCheckedState = !this.ipfsCheckedState
-    window.localStorage.setItem(`ipfs/${this.exEnvironment}/${this.networkName}`, this.ipfsCheckedState)
   }
 
   enableContractNames (enable) {
@@ -124,33 +102,6 @@ class ContractDropdownUI {
     this.enableAtAddress(false)
     this.abiLabel.style.display = 'none'
 
-    const savedConfig = window.localStorage.getItem(`ipfs/${this.exEnvironment}/${this.networkName}`)
-    this.ipfsCheckedState = savedConfig === 'true' ? true : false // eslint-disable-line
-
-    this.ipfsCheckbox = yo`
-      <input
-        id="deployAndRunPublishToIPFS"
-        data-id="contractDropdownIpfsCheckbox"
-        class="form-check-input custom-control-input"
-        type="checkbox"
-        onchange=${() => this.toggleCheckedState()}
-      >
-    `
-    if (this.ipfsCheckedState) this.ipfsCheckbox.checked = true
-
-    this.deployCheckBox = yo`
-      <div class="d-flex py-1 align-items-center custom-control custom-checkbox">
-        ${this.ipfsCheckbox}
-        <label
-          for="deployAndRunPublishToIPFS"
-          data-id="contractDropdownIpfsCheckboxLabel"
-          class="m-0 form-check-label custom-control-label ${css.checkboxAlign}"
-          title="Publishing the source code and metadata to IPFS facilitates source code verification using Sourcify and will greatly foster contract adoption (auditing, debugging, calling it, etc...)"
-        >
-          Publish to IPFS
-        </label>
-      </div>
-      `
     this.createPanel = yo`<div class="${css.deployDropdown}"></div>`
     this.orLabel = yo`<div class="${css.orLabel} mt-2">or</div>`
 
@@ -248,7 +199,6 @@ class ContractDropdownUI {
       true
     )
     this.createPanel.appendChild(createConstructorInstance.render())
-    this.createPanel.appendChild(this.deployCheckBox)
   }
 
   getSelectedContract () {
