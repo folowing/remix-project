@@ -449,19 +449,6 @@ export const CompilerContainer = (props: CompilerContainerProps) => {
     })
   }
 
-  const handleEvmVersionChange = (value) => {
-    if (!value) return
-    let v = value
-    if (v === 'default') {
-      v = null
-    }
-    compileTabLogic.setEvmVersion(v)
-    state.autoCompile && compile()
-    setState(prevState => {
-      return { ...prevState, evmVersion: value }
-    })
-  }
-
   const updatehhCompilation = (event) => {
     const checked = event.target.checked
 
@@ -475,7 +462,6 @@ export const CompilerContainer = (props: CompilerContainerProps) => {
   */
   const setConfiguration = (settings: ConfigurationSettings) => {
     handleLoadVersion(`soljson-v${settings.version}.js`)
-    handleEvmVersionChange(settings.evmVersion)
     handleLanguageChange(settings.language)
     handleOptimizeChange(settings.optimize)
     onChangeRuns(settings.runs)
@@ -507,21 +493,6 @@ export const CompilerContainer = (props: CompilerContainerProps) => {
             <select onChange={(e) => handleLanguageChange(e.target.value)} value={state.language} className="custom-select" id="compilierLanguageSelector" title="Available since v0.5.7">
               <option value='Solidity'>Solidity</option>
               <option value='Yul'>Yul</option>
-            </select>
-          </div>
-          <div className="mb-2">
-            <label className="remixui_compilerLabel form-check-label" htmlFor="evmVersionSelector">EVM Version</label>
-            <select value={state.evmVersion} onChange={(e) => handleEvmVersionChange(e.target.value)} className="custom-select" id="evmVersionSelector">
-              <option data-id={state.evmVersion === 'default' ? 'selected' : ''} value="default">compiler default</option>
-              <option data-id={state.evmVersion === 'berlin' ? 'selected' : ''} value="berlin">berlin</option>
-              <option data-id={state.evmVersion === 'muirGlacier' ? 'selected' : ''} value="muirGlacier">muirGlacier</option>
-              <option data-id={state.evmVersion === 'istanbul' ? 'selected' : ''} value="istanbul">istanbul</option>
-              <option data-id={state.evmVersion === 'petersburg' ? 'selected' : ''} value="petersburg">petersburg</option>
-              <option data-id={state.evmVersion === 'constantinople' ? 'selected' : ''} value="constantinople">constantinople</option>
-              <option data-id={state.evmVersion === 'byzantium' ? 'selected' : ''} value="byzantium">byzantium</option>
-              <option data-id={state.evmVersion === 'spuriousDragon' ? 'selected' : ''} value="spuriousDragon">spuriousDragon</option>
-              <option data-id={state.evmVersion === 'tangerineWhistle' ? 'selected' : ''} value="tangerineWhistle">tangerineWhistle</option>
-              <option data-id={state.evmVersion === 'homestead' ? 'selected' : ''} value="homestead">homestead</option>
             </select>
           </div>
           <div className="mt-3">
