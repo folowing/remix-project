@@ -144,7 +144,7 @@ class Blockchain {
         return cb('Unable to retrieve the current network gas price.' + warnMessage + error)
       }
       try {
-        const gasPriceValue = this.fromWei(gasPrice, false, 'gwei')
+        const gasPriceValue = gasPrice
         cb(null, gasPriceValue)
       } catch (e) {
         cb(warnMessage + e.message, null, false)
@@ -161,13 +161,13 @@ class Blockchain {
 
   fromWei (value, doTypeConversion, unit) {
     if (doTypeConversion) {
-      return Web3.utils.fromWei(typeConversion.toInt(value), unit || 'ether')
+      return Web3.utils.fromWei(typeConversion.toInt(value), unit || 'mwei')
     }
-    return Web3.utils.fromWei(value.toString(10), unit || 'ether')
+    return Web3.utils.fromWei(value.toString(10), unit || 'mwei')
   }
 
   toWei (value, unit) {
-    return Web3.utils.toWei(value, unit || 'gwei')
+    return Web3.utils.toWei(value, unit || 'mwei')
   }
 
   calculateFee (gas, gasPrice, unit) {
@@ -181,7 +181,7 @@ class Blockchain {
       // removed, but for now keeping the original logic
       try {
         const fee = this.calculateFee(tx.gas, gasPrice)
-        txFeeText = ' ' + this.fromWei(fee, false, 'ether') + ' Ether'
+        txFeeText = ' ' + this.fromWei(fee, false, 'mwei') + ' Trx'
         priceStatus = true
       } catch (e) {
         txFeeText = ' Please fix this issue before sending any transaction. ' + e.message

@@ -138,8 +138,8 @@ class SettingsUI {
 
     const gasPriceEl = yo`
       <div class="${css.crow}">
-        <label class="${css.settingsLabel}">Gas limit</label>
-        <input type="number" class="form-control ${css.gasNval} ${css.col2}" id="gasLimit" value="3000000">
+        <label class="${css.settingsLabel}">Fee limit</label>
+        <input type="number" class="form-control ${css.gasNval} ${css.col2}" id="gasLimit" value="400000000">
       </div>
     `
 
@@ -161,10 +161,8 @@ class SettingsUI {
             onchange=${() => this.validateValue()}
           >
           <select name="unit" class="form-control p-1 ${css.gasNvalUnit} ${css.col2_2} custom-select" id="unit">
-            <option data-unit="wei">wei</option>
-            <option data-unit="gwei">gwei</option>
-            <option data-unit="finney">finney</option>
-            <option data-unit="ether">ether</option>
+            <option data-unit="wei">sun</option>
+            <option data-unit="mwei">trx</option>
           </select>
         </div>
       </div>

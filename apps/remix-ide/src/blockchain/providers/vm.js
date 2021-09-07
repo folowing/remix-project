@@ -45,7 +45,7 @@ class VMProvider {
       if (err) {
         return cb(err)
       }
-      cb(null, Web3.utils.fromWei(new BN(res).toString(10), 'ether'))
+      cb(null, Web3.utils.fromWei(new BN(res).toString(10), 'mwei'))
     })
   }
 

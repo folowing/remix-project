@@ -236,8 +236,8 @@ export class RunTab extends ViewPlugin {
           const select = document.getElementById('unit')
           const index = select.selectedIndex
           const selectedUnit = select.querySelectorAll('option')[index].dataset.unit
-          let unit = 'ether' // default
-          if (['ether', 'finney', 'gwei', 'wei'].indexOf(selectedUnit) >= 0) {
+          let unit = 'mwei' // default
+          if (['mwei', 'wei'].indexOf(selectedUnit) >= 0) {
             unit = selectedUnit
           }
           cb(null, Web3.utils.toWei(number, unit))
