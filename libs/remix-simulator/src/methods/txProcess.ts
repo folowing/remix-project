@@ -1,7 +1,7 @@
 import { execution } from '@remix-project/remix-lib'
 const TxExecution = execution.txExecution
 
-function runCall (payload, from, to, data, value, gasLimit, txRunner, callbacks, callback) {
+function runCall (payload, from, to, data, value, tokenId, tokenValue, gasLimit, txRunner, callbacks, callback) {
   const finalCallback = function (err, result) {
     if (err) {
       return callback(err)
@@ -9,10 +9,10 @@ function runCall (payload, from, to, data, value, gasLimit, txRunner, callbacks,
     return callback(null, result)
   }
 
-  TxExecution.callFunction(from, to, data, value, gasLimit, { constant: true }, txRunner, callbacks, finalCallback)
+  TxExecution.callFunction(from, to, data, value, tokenId, tokenValue, gasLimit, { constant: true }, txRunner, callbacks, finalCallback)
 }
 
-function runTx (payload, from, to, data, value, gasLimit, txRunner, callbacks, callback) {
+function runTx (payload, from, to, data, value, tokenId, tokenValue, gasLimit, txRunner, callbacks, callback) {
   const finalCallback = function (err, result) {
     if (err) {
       return callback(err)
@@ -20,10 +20,10 @@ function runTx (payload, from, to, data, value, gasLimit, txRunner, callbacks, c
     callback(null, result)
   }
 
-  TxExecution.callFunction(from, to, data, value, gasLimit, { constant: false }, txRunner, callbacks, finalCallback)
+  TxExecution.callFunction(from, to, data, value, tokenId, tokenValue, gasLimit, { constant: false }, txRunner, callbacks, finalCallback)
 }
 
-function createContract (payload, from, data, value, gasLimit, txRunner, callbacks, callback) {
+function createContract (payload, from, data, value, tokenId, tokenValue, gasLimit, txRunner, callbacks, callback) {
   const finalCallback = function (err, result) {
     if (err) {
       return callback(err)
@@ -31,11 +31,11 @@ function createContract (payload, from, data, value, gasLimit, txRunner, callbac
     callback(null, result)
   }
 
-  TxExecution.createContract(from, data, value, gasLimit, txRunner, callbacks, finalCallback)
+  TxExecution.createContract(from, data, value, tokenId, tokenValue, gasLimit, txRunner, callbacks, finalCallback)
 }
 
 export function processTx (txRunnerInstance, payload, isCall, callback) {
-  let { from, to, data, value, gas } = payload.params[0]
+  let { from, to, data, value, tokenId, tokenValue, gas } = payload.params[0]
   gas = gas || 3000000
 
   const callbacks = {
@@ -54,10 +54,10 @@ export function processTx (txRunnerInstance, payload, isCall, callback) {
   }
 
   if (isCall) {
-    runCall(payload, from, to, data, value, gas, txRunnerInstance, callbacks, callback)
+    runCall(payload, from, to, data, value, tokenId, tokenValue, gas, txRunnerInstance, callbacks, callback)
   } else if (to) {
-    runTx(payload, from, to, data, value, gas, txRunnerInstance, callbacks, callback)
+    runTx(payload, from, to, data, value, tokenId, tokenValue, gas, txRunnerInstance, callbacks, callback)
   } else {
-    createContract(payload, from, data, value, gas, txRunnerInstance, callbacks, callback)
+    createContract(payload, from, data, value, tokenId, tokenValue, gas, txRunnerInstance, callbacks, callback)
   }
 }

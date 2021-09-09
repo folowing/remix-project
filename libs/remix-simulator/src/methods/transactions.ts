@@ -193,7 +193,9 @@ export class Transactions {
         input: receipt.input,
         nonce: 2, // 0x15 // the nonce should be updated
         // "transactionIndex": 0,
-        value: receipt.value
+        value: receipt.value,
+        tokenId: receipt.tokenId,
+        tokenValue: receipt.tokenValue
         // "value":"0xf3dbb76162000" // 4290000000000000
         // "v": "0x25", // 37
         // "r": "0x1b5e176d927f8e9ab405058b2d2457392da3e20f328b16ddabcebc33eaac5fea",

@@ -120,6 +120,12 @@ export class Web3VmProvider {
     if (data.value) {
       tx['value'] = data.value.toString(10)
     }
+    if (data.tokenId) {
+      tx['tokenId'] = data.tokenId.toString(10)
+    }
+    if (data.tokenValue) {
+      tx['tokenValue'] = data.tokenValue.toString(10)
+    }
     this.txs[this.processingHash] = tx
     this.txsReceipt[this.processingHash] = tx
     this.storageCache[this.processingHash] = {}

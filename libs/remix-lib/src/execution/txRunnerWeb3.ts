@@ -80,11 +80,11 @@ export class TxRunnerWeb3 {
       data = '0x' + data
     }
 
-    return this.runInNode(args.from, args.to, data, args.value, args.gasLimit, args.useCall, args.timestamp, confirmationCb, gasEstimationForceSend, promptCb, callback)
+    return this.runInNode(args.from, args.to, data, args.value, args.tokenId, args.tokenValue, args.gasLimit, args.useCall, args.timestamp, confirmationCb, gasEstimationForceSend, promptCb, callback)
   }
 
-  runInNode (from, to, data, value, gasLimit, useCall, timestamp, confirmCb, gasEstimationForceSend, promptCb, callback) {
-    const tx = { from: from, to: to, data: data, value: value }
+  runInNode (from, to, data, value, tokenId, tokenValue, gasLimit, useCall, timestamp, confirmCb, gasEstimationForceSend, promptCb, callback) {
+    const tx = { from: from, to: to, data: data, value: value, tokenId: tokenId, tokenValue: tokenValue }
 
     if (useCall) {
       tx['gas'] = gasLimit

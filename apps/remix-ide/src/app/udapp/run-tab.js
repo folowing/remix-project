@@ -251,6 +251,23 @@ export class RunTab extends ViewPlugin {
         } catch (e) {
           cb(e.message)
         }
+      },
+      getExtendValue: (cb) => {
+        try {
+          const tokenId = '0x' + new ethJSUtil.BN($('#tokenId').val(), 10).toString(16)
+          const tokenValue = '0x' + new ethJSUtil.BN($('#tokenValue').val(), 10).toString(16)
+          const userFeePercentage = 0
+          const originEnergyLimit = 0
+
+          cb(null, {
+            tokenId,
+            tokenValue,
+            userFeePercentage,
+            originEnergyLimit
+          })
+        } catch (e) {
+          cb(e.message)
+        }
       }
     })
     this.renderInstanceContainer()

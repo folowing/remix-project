@@ -213,6 +213,24 @@ var css = csjs`
     margin-left: 10px;
     font-size: 0.8rem;
   }
+  .gasNTid {
+    width: 41%;
+    font-size: 0.8rem;
+  }
+  .gasNTval {
+    width: 55%;
+    margin-left: 10px;
+    font-size: 0.8rem;
+  }
+  .extendWrapper {
+    display: none;
+  }
+  .extendBtn {
+    width: 100%;
+    cursor: pointer;
+    margin: 0.8rem 0 -16px;
+    text-align: center;
+  }
   .deployDropdown {
     text-align: center;
     text-transform: uppercase;

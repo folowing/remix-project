@@ -437,10 +437,23 @@ class Blockchain {
           next(null, address, value, gasLimit)
         })
       },
-      function runTransaction (fromAddress, value, gasLimit, next) {
+      function getExtendValue (address, value, gasLimit, next) {
+        if (self.transactionContextAPI.getExtendValue) {
+          return self.transactionContextAPI.getExtendValue((err, res) => {
+            next(err, address, value, gasLimit, res)
+          })
+        }
+        next(null, address, value, gasLimit, {})
+      },
+      function runTransaction (fromAddress, value, gasLimit, extend, next) {
         const tx = { to: args.to, data: args.data.dataHex, useCall: args.useCall, from: fromAddress, value: value, gasLimit: gasLimit, timestamp: args.data.timestamp }
         const payLoad = { funAbi: args.data.funAbi, funArgs: args.data.funArgs, contractBytecode: args.data.contractBytecode, contractName: args.data.contractName, contractABI: args.data.contractABI, linkReferences: args.data.linkReferences }
         if (!tx.timestamp) tx.timestamp = Date.now()
+
+        Object.assign(tx, extend)
+        Object.assign(payLoad, extend)
+        tx.funAbi = args.data.funAbi
+        tx.contractName = args.data.contractName
 
         const timestamp = tx.timestamp
         self.event.trigger('initiatingTransaction', [timestamp, tx, payLoad])

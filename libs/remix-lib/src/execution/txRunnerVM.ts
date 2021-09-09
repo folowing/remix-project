@@ -41,13 +41,13 @@ export class TxRunnerVM {
     }
 
     try {
-      this.runInVm(args.from, args.to, data, args.value, args.gasLimit, args.useCall, args.timestamp, callback)
+      this.runInVm(args.from, args.to, data, args.value, args.tokenId, args.tokenValue, args.gasLimit, args.useCall, args.timestamp, callback)
     } catch (e) {
       callback(e, null)
     }
   }
 
-  runInVm (from, to, data, value, gasLimit, useCall, timestamp, callback) {
+  runInVm (from, to, data, value, tokenId, tokenValue, gasLimit, useCall, timestamp, callback) {
     const self = this
     const account = self.vmaccounts[from]
     if (!account) {
@@ -81,6 +81,8 @@ export class TxRunnerVM {
           gasLimit: gasLimit,
           to: to,
           value: value,
+          tokenId: tokenId,
+          tokenValue: tokenValue,
           data: Buffer.from(data.slice(2), 'hex')
         }, { common: this.commonContext }).sign(account.privateKey)
       } else {

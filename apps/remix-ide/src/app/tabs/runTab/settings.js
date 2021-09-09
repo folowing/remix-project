@@ -17,7 +17,11 @@ class SettingsUI {
     this._components = {}
 
     this.blockchain.event.register('transactionExecuted', (error, from, to, data, lookupOnly, txResult) => {
-      if (!lookupOnly) this.el.querySelector('#value').value = 0
+      if (!lookupOnly) {
+        this.el.querySelector('#value').value = 0
+        this.el.querySelector('#tokenId').value = 0
+        this.el.querySelector('#tokenValue').value = 0
+      }
       if (error) return
       this.updateAccountBalances()
     })
@@ -88,6 +92,40 @@ class SettingsUI {
     if (v.lt(0)) valueEl.value = 0
   }
 
+  validateInputKeyExtend (e, id) {
+    const qs = `#${id}`
+    // preventing not numeric keys
+    // preventing 000 case
+    if (!helper.isNumeric(e.key) ||
+      (e.key === '0' && !parseInt(this.el.querySelector(qs).value) && this.el.querySelector(qs).value.length > 0)) {
+      e.preventDefault()
+      e.stopImmediatePropagation()
+    }
+  }
+
+  validateValueExtend (id) {
+    const valueEl = this.el.querySelector(`#${id}`)
+    if (!valueEl.value) {
+      // assign 0 if given value is
+      // - empty
+      valueEl.value = 0
+      return
+    }
+
+    let v
+    try {
+      v = new BN(valueEl.value, 10)
+      valueEl.value = v.toString(10)
+    } catch (e) {
+      // assign 0 if given value is
+      // - not valid (for ex 4345-54)
+      // - contains only '0's (for ex 0000) copy past or edit
+      valueEl.value = 0
+    }
+
+    // if giveen value is negative(possible with copy-pasting) set to 0
+    if (v.lt(0)) valueEl.value = 0
+  }
   render () {
     this.netUI = yo`<span class="${css.network} badge badge-secondary"></span>`
 
@@ -168,6 +206,56 @@ class SettingsUI {
       </div>
     `
 
+    const extendEl = yo`
+      <div class="${css.crow}">
+        <div class="${css.gasValueContainer}">
+          <div class="${css.gasNTid}">
+            <label class="${css.settingsLabel}" data-id="remixDRTokenIdLabel">Token id</label>
+            <input
+              type="number"
+              min="0"
+              pattern="^[0-9]"
+              step="1"
+              class="form-control ${css.col2}"
+              id="tokenId"
+              data-id="dandrTokenId"
+              value="0"
+              title="Enter the trc10 id"
+              onkeypress=${(e) => this.validateInputKeyExtend(e, 'tokenId')}
+              onchange=${() => this.validateValueExtend('tokenId')}
+            >
+          </div>
+          <div class="${css.gasNTval}">
+            <label class="${css.settingsLabel}" data-id="remixDRTokenValueLabel">Token value</label>
+            <input
+              type="number"
+              min="0"
+              pattern="^[0-9]"
+              step="1"
+              class="form-control ${css.col2}"
+              id="tokenValue"
+              data-id="dandrTokenValue"
+              value="0"
+              title="Enter the trc10 value"
+              onkeypress=${(e) => this.validateInputKeyExtend(e, 'tokenValue')}
+              onchange=${() => this.validateValueExtend('tokenValue')}
+            >
+          </div>
+        </div>
+      </div>
+    `
+
+    const extendWrapperEl = yo`
+      <div>
+        <div id="extendwrapper" class="${css.extendWrapper}">
+          ${extendEl}
+        </div>
+        <p class="${css.extendBtn}" onclick="${() => showExtend()}">
+          <i id="extendbtn" class="fas fa-angle-down"></i>
+        </p>
+      </div>
+    `
+
     const el = yo`
       <div class="${css.settings}">
         ${environmentEl}
@@ -175,8 +263,21 @@ class SettingsUI {
         ${accountEl}
         ${gasPriceEl}
         ${valueEl}
+        ${extendWrapperEl}
       </div>
     `
+
+    var showExtend = () => {
+      var extendBtn = extendWrapperEl.querySelector('#extendbtn')
+      var extendWrapper = extendWrapperEl.querySelector('#extendwrapper')
+
+      if (extendBtn.classList) {
+        extendBtn.classList.toggle('fa-angle-up')
+        var down = extendBtn.classList.toggle('fa-angle-down')
+        if (down) $(extendWrapper).hide()
+        else $(extendWrapper).show()
+      }
+    }
 
     var selectExEnv = environmentEl.querySelector('#selectExEnvOptions')
     this.setDropdown(selectExEnv)

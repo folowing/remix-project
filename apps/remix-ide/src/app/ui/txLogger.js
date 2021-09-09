@@ -309,6 +309,8 @@ function context (self, opts, blockchain) {
   var block = data.receipt ? data.receipt.blockNumber : data.tx.blockNumber || ''
   var i = data.receipt ? data.receipt.transactionIndex : data.tx.transactionIndex
   var value = val ? typeConversion.toInt(val) : 0
+  var tokenId = data.tx.tokenId ? typeConversion.toInt(data.tx.tokenId) : 0
+  var tokenValue = data.tx.tokenValue ? typeConversion.toInt(data.tx.tokenValue) : 0
   if (blockchain.getProvider() === 'vm') {
     return yo`
       <div>
@@ -317,6 +319,8 @@ function context (self, opts, blockchain) {
           <div class=${css.txItem}><span class=${css.txItemTitle}>from:</span> ${from}</div>
           <div class=${css.txItem}><span class=${css.txItemTitle}>to:</span> ${to}</div>
           <div class=${css.txItem}><span class=${css.txItemTitle}>value:</span> ${value} sun</div>
+          <div class=${css.txItem}><span class=${css.txItemTitle}>tokenId:</span> ${tokenId}</div>
+          <div class=${css.txItem}><span class=${css.txItemTitle}>tokenValue:</span> ${tokenValue}</div>
           <div class=${css.txItem}><span class=${css.txItemTitle}>data:</span> ${input}</div>
           <div class=${css.txItem}><span class=${css.txItemTitle}>logs:</span> ${logs}</div>
           <div class=${css.txItem}><span class=${css.txItemTitle}>hash:</span> ${hash}</div>
@@ -330,6 +334,8 @@ function context (self, opts, blockchain) {
           <div class=${css.txItem}><span class=${css.txItemTitle}>from:</span> ${from}</div>
           <div class=${css.txItem}><span class=${css.txItemTitle}>to:</span> ${to}</div>
           <div class=${css.txItem}><span class=${css.txItemTitle}>value:</span> ${value} sun</div>
+          <div class=${css.txItem}><span class=${css.txItemTitle}>tokenId:</span> ${tokenId}</div>
+          <div class=${css.txItem}><span class=${css.txItemTitle}>tokenValue:</span> ${tokenValue}</div>
           <div class=${css.txItem}><span class=${css.txItemTitle}>data:</span> ${input}</div>
           <div class=${css.txItem}><span class=${css.txItemTitle}>logs:</span> ${logs}</div>
           <div class=${css.txItem}><span class=${css.txItemTitle}>hash:</span> ${hash}</div>
@@ -408,6 +414,8 @@ function txDetails (e, tx, data, obj) {
       'decoded output': data.resolvedData && data.resolvedData.decodedReturnValue ? JSON.stringify(typeConversion.stringify(data.resolvedData.decodedReturnValue), null, '\t') : ' - ',
       logs: data.logs,
       val: data.tx.value,
+      tokenId: data.tx.tokenId,
+      tokenValue: data.tx.tokenValue,
       transactionCost: data.tx.transactionCost,
       executionCost: data.tx.executionCost
     })
@@ -584,6 +592,28 @@ function createTable (opts) {
     </tr>
   `
   if (opts.val) table.appendChild(val)
+
+  var tokenId = opts.tokenId != null ? typeConversion.toInt(opts.tokenId) : 0
+  tokenId = yo`
+    <tr class="${css.tr}">
+      <td class="${css.td}" data-shared="key_${opts.hash}"> tokenId </td>
+      <td class="${css.td}" data-id="txLoggerTableTokenId${opts.hash}" data-shared="pair_${opts.hash}">${tokenId}
+        ${copyToClipboard(() => `${tokenId}`)}
+      </td>
+    </tr>
+  `
+  if (opts.tokenId) table.appendChild(tokenId)
+
+  var tokenValue = opts.tokenValue != null ? typeConversion.toInt(opts.tokenValue) : 0
+  tokenValue = yo`
+    <tr class="${css.tr}">
+      <td class="${css.td}" data-shared="key_${opts.hash}"> tokenValue </td>
+      <td class="${css.td}" data-id="txLoggerTableTokenValue${opts.hash}" data-shared="pair_${opts.hash}">${tokenValue}
+        ${copyToClipboard(() => `${tokenValue}`)}
+      </td>
+    </tr>
+  `
+  if (opts.tokenValue) table.appendChild(tokenValue)
 
   return table
 }
