@@ -137,15 +137,15 @@ export const CompilerContainer = (props: CompilerContainerProps) => {
 
   // fetching both normal and wasm builds and creating a [version, baseUrl] map
   const fetchAllVersion = async callback => {
-    let selectedVersion;
+    let selectedVersion
     let allVersions: any = [
-      { path: 'builtin', longVersion: 'latest local version - 0.8.6' }
-    ];
+      // { path: 'builtin', longVersion: 'latest local version - 0.8.6' }
+    ]
     // fetch normal builds
-    const binRes: any = await promisedMiniXhr(`${baseURLTron}/list.json`);
+    const binRes: any = await promisedMiniXhr(`${baseURLTron}/list.json`)
     if (binRes.event.type === 'error') {
-      selectedVersion = 'builtin';
-      return callback(allVersions, selectedVersion);
+      selectedVersion = 'builtin'
+      return callback(allVersions, selectedVersion)
     } else {
       try {
         const versions = JSON.parse(binRes.json).builds.slice().reverse()
@@ -153,16 +153,16 @@ export const CompilerContainer = (props: CompilerContainerProps) => {
 
         allVersions.forEach(_ => {
           pathToURL[_.path] = baseURLTron
-        });
+        })
       } catch (e) {
         tooltip(
           'Cannot load compiler version list. It might have been blocked by an advertisement blocker. Please try deactivating any of them from this page and reload. Error: ' +
             e
-        );
+        )
       }
     }
-    callback(allVersions, selectedVersion);
-  };
+    callback(allVersions, selectedVersion)
+  }
 
   /**
    * Update the compilation button with the name of the current file
@@ -428,16 +428,6 @@ export const CompilerContainer = (props: CompilerContainerProps) => {
     state.autoCompile && compile()
     setState(prevState => {
       return { ...prevState, hideWarnings: checked }
-    })
-  }
-
-  const handleNightliesChange = (e) => {
-    const checked = e.target.checked
-
-    if (!checked) handleLoadVersion(state.defaultVersion)
-    config.set('includeNightlies', checked)
-    setState(prevState => {
-      return { ...prevState, includeNightlies: checked }
     })
   }
 
