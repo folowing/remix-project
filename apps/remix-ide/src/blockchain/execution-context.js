@@ -5,13 +5,15 @@ import { execution } from '@remix-project/remix-lib'
 import EventManager from '../lib/events'
 
 let web3
+let injectedProvider
 
-if (typeof window !== 'undefined' && typeof window.ethereum !== 'undefined') {
-  var injectedProvider = window.ethereum
-  web3 = new Web3(injectedProvider)
-} else {
-  web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
-}
+// if (typeof window !== 'undefined' && typeof window.ethereum !== 'undefined') {
+//   var injectedProvider = window.ethereum
+//   web3 = new Web3(injectedProvider)
+// } else {
+//   web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
+// }
+web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
 
 /*
   trigger contextChanged, web3EndpointChanged
