@@ -15,6 +15,7 @@ import { customAction } from '@remixproject/plugin-api/lib/file-system/file-pane
 
 import './css/file-explorer.css'
 
+// @ts-ignore
 const queryParams = new QueryParams()
 
 export const FileExplorer = (props: FileExplorerProps) => {
