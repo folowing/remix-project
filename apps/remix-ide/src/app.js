@@ -440,7 +440,7 @@ Please make a backup of your contracts and start using http://remix.ethereum.org
     registry.get('fileproviders/browser').api
   )
   const analysis = new AnalysisTab(registry)
-  const debug = new DebuggerTab()
+  // const debug = new DebuggerTab()
   const test = new TestTab(
     registry.get('filemanager').api,
     registry.get('offsettolinecolumnconverter').api,
@@ -454,7 +454,7 @@ Please make a backup of your contracts and start using http://remix.ethereum.org
     compileTab,
     compileTab.compileTabLogic,
     run,
-    debug,
+    // debug,
     analysis,
     test,
     filePanel.remixdHandle,
