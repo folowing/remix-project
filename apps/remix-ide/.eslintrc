@@ -6,7 +6,8 @@
     "extends": "../../.eslintrc",
     "globals": {
         "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
+        "SharedArrayBuffer": "readonly",
+        "BrowserFS": "readonly"
     },
     "parserOptions": {
         "ecmaVersion": 11,
@@ -15,4 +16,4 @@
     "rules": {
         "standard/no-callback-literal": "off"
     }
-} 
+}

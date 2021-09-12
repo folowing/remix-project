@@ -54,3 +54,4 @@ testem.log
 Thumbs.db
 
 apps/remix-ide/contracts/
+package-lock.json
