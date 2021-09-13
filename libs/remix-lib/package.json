@@ -14,12 +14,12 @@
   ],
   "main": "src/index.js",
   "dependencies": {
-    "@tvmjs/block": "3.4.0",
-    "@tvmjs/tx": "3.3.0",
-    "@tvmjs/util": "7.1.0",
+    "@tvmjs/block": "^3.4.0-tron.1",
+    "@tvmjs/tx": "^3.3.0-tron.1",
+    "@tvmjs/util": "^7.1.0-tron.1",
     "async": "^2.1.2",
     "ethers": "^5.4.2",
-    "tron-solc": "0.8.6",
+    "tron-solc": "^0.8.6-tron.1",
     "string-similarity": "^4.0.4",
     "web3": "^1.5.1",
     "ethjs-util": "^0.1.5"

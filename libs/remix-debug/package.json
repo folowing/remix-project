@@ -18,18 +18,18 @@
   ],
   "main": "src/index.js",
   "dependencies": {
-    "@tvmjs/block": "3.4.0",
-    "@tvmjs/common": "2.4.0",
-    "@tvmjs/tx": "3.3.0",
-    "@tvmjs/vm": "5.5.0",
+    "@tvmjs/block": "^3.4.0-tron.1",
+    "@tvmjs/common": "^2.4.0-tron.1",
+    "@tvmjs/tx": "^3.3.0-tron.1",
+    "@tvmjs/vm": "^5.5.0-tron.1",
     "@remix-project/remix-astwalker": "0.0.35-tron",
     "@remix-project/remix-lib": "0.5.5-tron",
     "commander": "^2.19.0",
     "deep-equal": "^1.0.1",
-    "@tvmjs/util": "7.1.0",
+    "@tvmjs/util": "^7.1.0-tron.1",
     "ethers": "^5.4.2",
     "web3": "^1.5.1",
-    "tron-solc": "0.8.6"
+    "tron-solc": "^0.8.6-tron.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",

@@ -55,3 +55,4 @@ Thumbs.db
 
 apps/remix-ide/contracts/
 package-lock.json
+libs/remix-simulator/package-lock.json
