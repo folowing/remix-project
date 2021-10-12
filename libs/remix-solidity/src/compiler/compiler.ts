@@ -1,6 +1,6 @@
 'use strict'
 
-import { update } from 'tron-solc/abi'
+import { update } from 'tron-solc-js/abi'
 import * as webworkify from 'webworkify-webpack'
 import compilerInput from './compiler-input'
 import EventManager from '../lib/eventManager'
@@ -103,7 +103,7 @@ export class Compiler {
 
   onInternalCompilerLoaded (): void {
     if (this.state.worker === null) {
-      const compiler: any = typeof (window) !== 'undefined' && window['Module'] ? require('tron-solc/wrapper')(window['Module']) : require('tron-solc')
+      const compiler: any = typeof (window) !== 'undefined' && window['Module'] ? require('tron-solc-js/wrapper')(window['Module']) : require('tron-solc-js')
       this.state.compileJSON = (source: SourceWithTarget) => {
         const missingInputs: string[] = []
         const missingInputsCallback = (path: string) => {
@@ -170,8 +170,9 @@ export class Compiler {
 
   loadRemoteVersion (version: string): void {
     console.log(`Loading remote solc version ${version} ...`)
-    const compiler: any = require('tron-solc')
-    compiler.loadRemoteVersion(version, (err, remoteCompiler) => {
+    const compiler: any = require('tron-solc-js')
+    const wanted = version.match(/(v\d+\.\d+\.\d+)/)[1]
+    compiler.loadRemoteVersion(wanted, (err, remoteCompiler) => {
       if (err) {
         console.error('Error in loading remote solc compiler: ', err)
       } else {
@@ -193,7 +194,7 @@ export class Compiler {
           }
           this.onCompilationFinished(result, missingInputs, source)
         }
-        this.onCompilerLoaded(version)
+        this.onCompilerLoaded(wanted)
       }
     })
   }

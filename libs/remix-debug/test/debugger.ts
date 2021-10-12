@@ -5,7 +5,7 @@ import * as sourceMappingDecoder from '../src/source/sourceMappingDecoder'
 import { Ethdebugger as Debugger } from '../src/Ethdebugger'
 import { BreakpointManager } from '../src/code/breakpointManager'
 
-var compiler = require('tron-solc')
+var compiler = require('tron-solc-js')
 var vmCall = require('./vmCall')
 var remixLib = require('@remix-project/remix-lib')
 

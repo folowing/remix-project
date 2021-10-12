@@ -5,7 +5,7 @@ import { CodeManager } from '../src/code/codeManager'
 import { SourceLocationTracker } from '../src/source/sourceLocationTracker'
 import { compilerInput } from './helpers/compilerHelper'
 const web3Test = require('./resources/testWeb3.ts')
-const compiler = require('tron-solc')
+const compiler = require('tron-solc-js')
 
 tape('SourceLocationTracker', function (t) {
   t.test('SourceLocationTracker.getSourceLocationFromVMTraceIndex - simple contract', async function (st) {

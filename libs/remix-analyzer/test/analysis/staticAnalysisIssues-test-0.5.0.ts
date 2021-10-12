@@ -3,7 +3,7 @@ import { helpers } from '@remix-project/remix-lib'
 import { readFileSync } from 'fs'
 import { join } from 'path'
 import { default as StatRunner } from '../../src/solidity-analyzer'
-import solc from 'tron-solc'
+import solc from 'tron-solc-js'
 import { CompilationResult, AnalysisReportObj, AnalysisReport } from '../../src/types'
 import { checksEffectsInteraction } from '../../src/solidity-analyzer/modules/'
 const {compilerInput  } = helpers.compiler

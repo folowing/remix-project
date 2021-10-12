@@ -2,7 +2,7 @@
 const tape = require('tape')
 const sourceMapping = require('./resources/sourceMapping')
 import * as sourceMappingDecoder from '../src/source/sourceMappingDecoder'
-const compiler = require('tron-solc')
+const compiler = require('tron-solc-js')
 const compilerInput = require('./helpers/compilerHelper').compilerInput
 
 tape('sourceMappingDecoder', function (t) {

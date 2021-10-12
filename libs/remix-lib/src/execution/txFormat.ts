@@ -2,7 +2,7 @@
 import { ethers } from 'ethers'
 import { encodeParams as encodeParamsHelper, encodeFunctionId, tMakeFullTypeDefinition, tConvertTypes } from './txHelper'
 import { eachOfSeries } from 'async'
-import { linkBytecode as linkBytecodeSolc } from 'tron-solc/linker'
+import { linkBytecode as linkBytecodeSolc } from 'tron-solc-js/linker'
 import { isValidAddress, addHexPrefix } from '@tvmjs/util'
 
 /**

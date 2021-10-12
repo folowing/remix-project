@@ -1,6 +1,6 @@
 import { compilerInput } from '../../helpers/compilerHelper'
 import { TraceManager } from '../../../src/trace/traceManager'
-import { compile } from 'tron-solc'
+import { compile } from 'tron-solc-js'
 import * as stateDecoder from '../../../src/solidity-decoder/stateDecoder'
 import { sendTx, initVM } from '../vmCall'
 import { StorageResolver } from '../../../src/storage/storageResolver'

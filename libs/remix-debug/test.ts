@@ -2,7 +2,7 @@
 var CmdLine = require('./src/cmdline/index')
 // var compilation = require('./compilation.json')
 
-var solc = require('tron-solc')
+var solc = require('tron-solc-js')
 var fs = require('fs')
 
 var filename = 'test/sol/simple_storage.sol'

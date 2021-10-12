@@ -79,7 +79,7 @@ commander
     const compilerConfig = {} as CompilerConfiguration
     if (commander.compiler) {
       const compVersion = commander.compiler
-      const baseURL = 'https://binaries.soliditylang.org/wasm/'
+      const baseURL = 'https://tronsuper.github.io/tron-solc-bin/bin/'
       const response: AxiosResponse = await axios.get(baseURL + 'list.json')
       const { releases, latestRelease } = response.data
       const compString = releases[compVersion]
@@ -87,7 +87,8 @@ commander
         log.error(`No compiler found in releases with version ${compVersion}`)
         process.exit()
       } else {
-        compilerConfig.currentCompilerUrl = compString.replace('soljson-', '').replace('.js', '')
+        // @ts-ignore
+        compilerConfig.currentCompilerUrl = compString.replace('soljson_', '').replace('.js', '')
         log.info(`Compiler version set to ${compVersion}. Latest version is ${latestRelease}`)
       }
     }

@@ -5,7 +5,7 @@ import * as txHelper from '../src/execution/txHelper'
 import { hexToIntArray } from '../src/util'
 import { compilerInput } from '../src/helpers/compilerHelper'
 
-const compiler = require('tron-solc')
+const compiler = require('tron-solc-js')
 /** default solc version is v0.8.6+commit.0e36fba, do not need to load from Remote, waste of time**/
 // const solidityVersion = 'v0.8.6+commit.0e36fba'
 

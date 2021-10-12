@@ -5,7 +5,7 @@ import { join } from 'path'
 import { default as StatRunner } from '../../src/solidity-analyzer'
 import * as modules from '../../src/solidity-analyzer/modules/'
 import { CompilationResult, AnalysisReportObj, AnalysisReport } from '../../src/types'
-import solcOrg from 'tron-solc'
+import solcOrg from 'tron-solc-js'
 const { compilerInput } = helpers.compiler
 const folder: string = 'solidity-v0.4.24'
 

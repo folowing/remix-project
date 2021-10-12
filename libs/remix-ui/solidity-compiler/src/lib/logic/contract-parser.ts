@@ -1,5 +1,5 @@
 'use strict'
-import * as solcTranslate from 'tron-solc/translate'
+import * as solcTranslate from 'tron-solc-js/translate'
 import * as remixLib from '@remix-project/remix-lib'
 
 const txHelper = remixLib.execution.txHelper

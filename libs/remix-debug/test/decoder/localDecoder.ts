@@ -1,6 +1,6 @@
 'use strict'
 import tape from 'tape'
-var compiler = require('tron-solc')
+var compiler = require('tron-solc-js')
 var intLocal = require('./contracts/intLocal')
 var miscLocal = require('./contracts/miscLocal')
 var structArrayLocal = require('./contracts/structArrayLocal')

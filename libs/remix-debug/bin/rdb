@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import program from 'commander'
-import { compileStandardWrapper } from 'tron-solc'
+import { compileStandardWrapper } from 'tron-solc-js'
 import { readFileSync } from 'fs'
 import { start } from 'repl'
 import { version } from '../package.json'

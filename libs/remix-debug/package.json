@@ -29,7 +29,7 @@
     "@tvmjs/util": "^7.1.0-tron.1",
     "ethers": "^5.4.2",
     "web3": "^1.5.1",
-    "tron-solc": "^0.8.6-tron.1"
+    "tron-solc-js": "^0.8.6-tron.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",

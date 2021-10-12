@@ -55,10 +55,10 @@ Commands:
     })
 
     test('remix-tests running a test file with custom compiler version', () => {
-      const res = spawnSync(executablePath, ['--compiler', '0.7.4', resolve(__dirname + '/examples_0/assert_ok_test.sol')])
+      const res = spawnSync(executablePath, ['--compiler', '0.7.6', resolve(__dirname + '/examples_0/assert_ok_test.sol')])
       // match initial lines
-      expect(res.stdout.toString().trim().includes('Compiler version set to 0.7.4. Latest version is')).toBeTruthy()
-      expect(res.stdout.toString().trim().includes('Loading remote solc version v0.7.4+commit.3f05b770 ...')).toBeTruthy()
+      expect(res.stdout.toString().trim().includes('Compiler version set to 0.7.6. Latest version is')).toBeTruthy()
+      expect(res.stdout.toString().trim().includes('Loading remote solc version v0.7.6+commit.d1802f2 ...')).toBeTruthy()
       expect(res.stdout.toString().trim()).toMatch(/:: Running remix-tests - Unit testing for solidity ::/)
       expect(res.stdout.toString().trim()).toMatch(/creation of library remix_tests.sol:Assert pending.../)
       // match test result
@@ -121,10 +121,10 @@ Commands:
     })
 
     test('remix-tests running a test file with all options', () => {
-      const res = spawnSync(executablePath, ['--compiler', '0.7.5', '--evm', 'istanbul', '--optimize', 'true', '--runs', '250', resolve(__dirname + '/examples_0/assert_ok_test.sol')])
+      const res = spawnSync(executablePath, ['--compiler', '0.7.7', '--evm', 'istanbul', '--optimize', 'true', '--runs', '250', resolve(__dirname + '/examples_0/assert_ok_test.sol')])
       // match initial lines
-      expect(res.stdout.toString().trim().includes('Compiler version set to 0.7.5. Latest version is')).toBeTruthy()
-      expect(res.stdout.toString().trim().includes('Loading remote solc version v0.7.5+commit.eb77ed08 ...')).toBeTruthy()
+      expect(res.stdout.toString().trim().includes('Compiler version set to 0.7.7. Latest version is')).toBeTruthy()
+      expect(res.stdout.toString().trim().includes('Loading remote solc version v0.7.7+commit.0423f3a ...')).toBeTruthy()
       expect(res.stdout.toString().trim().includes('EVM set to istanbul')).toBeTruthy()
       expect(res.stdout.toString().trim().includes('Optimization is enabled')).toBeTruthy()
       expect(res.stdout.toString().trim().includes('Runs set to 250')).toBeTruthy()
