@@ -1,6 +1,6 @@
 {
   "name": "@remix-project/remix-simulator",
-  "version": "0.2.5-tron",
+  "version": "0.2.5-tron.1",
   "description": "Ethereum IDE and tools for the web",
   "contributors": [
     {
@@ -17,7 +17,7 @@
     "@tvmjs/block": "^3.4.0-tron.1",
     "@tvmjs/common": "^2.4.0-tron.1",
     "@tvmjs/vm": "^5.5.0-tron.1",
-    "@remix-project/remix-lib": "0.5.5-tron",
+    "@remix-project/remix-lib": "0.5.5-tron.1",
     "ansi-gray": "^0.1.1",
     "async": "^3.1.0",
     "body-parser": "^1.18.2",
