@@ -81,6 +81,7 @@ commander
       const compVersion = commander.compiler
       const baseURL = 'https://tronsuper.github.io/tron-solc-bin/bin/'
       const response: AxiosResponse = await axios.get(baseURL + 'list.json')
+      // @ts-ignore
       const { releases, latestRelease } = response.data
       const compString = releases[compVersion]
       if (!compString) {
